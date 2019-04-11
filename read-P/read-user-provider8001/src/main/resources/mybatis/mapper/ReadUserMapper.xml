@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yong.springcloud.dao.ReadUserDao">
+
+	<select id="findById" resultType="ReadUser" parameterType="Long">
+		select userid,username,userpwd from readuser where userid=#{userid};
+	</select>
+	<select id="findAll" resultType="ReadUser">
+		select userid,username,userpwd from readuser;
+	</select>
+	<insert id="addUser" parameterType="ReadUser">
+		INSERT INTO readuser(username,userpwd) VALUES(#{username},#{userpwd});
+	</insert>
+	<update id="upUser" parameterType="ReadUser">
+		update readuser set username=#{username},userpwd=#{userpwd} where userid=#{userid};
+	</update>
+	<delete id="delUser" parameterType="Long">
+		delete from readuser where userid=#{userid};
+	</delete>
+
+</mapper>
