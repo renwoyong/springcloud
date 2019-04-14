@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>user</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+</head>
+<body class="container">
+<br/>
+<h1>修改作家</h1>
+<br/><br/>
+<div class="with:80%">
+    <form class="form-horizontal"   th:action="@{/consumer/author/edit}" th:object="${author}"  method="post">
+        <input type="hidden" name="authorid" th:value="*{authorid}" />
+        <div class="form-group">
+            <label for="authorname" class="col-sm-2 control-label">AuthorName</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="authorname"  id="AuthorName" th:value="*{authorname}" placeholder="AuthorName"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="authoremail" class="col-sm-2 control-label" >AuthorEmail</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="authoremail" id="AuthorEmail" th:value="*{authoremail}" placeholder="AuthorEmail"/>
+            </div>
+        </div>
+       <div class="from-group">
+            <label for="authorsex" class="col-sm-2 control-label">AuthorSex</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="authorsex"  id="AuthorSex" th:value="*{authorsex}" placeholder="AuthorSex"/>
+            </div>
+        </div>
+        <div class="from-group">
+            <label for="authorincome" class="col-sm-2 control-label">AuthorIncome</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="authorincome"  id="AuthorIncome" th:value="*{authorincome}" placeholder="AuthorIncome"/>
+            </div>
+        </div>
+        <div class="from-group">
+            <label for="authorintroduction" class="col-sm-2 control-label">AuthorIntroduction</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="authorintroduction"  id="AuthorIntroduction" th:value="*{authorintroduction}" placeholder="AuthorIntroduction"/>
+            </div>
+        </div>
+        <div class="from-group">
+            <label for="authorworks" class="col-sm-2 control-label">AuthorWorks</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="authorworks"  id="AuthorWorks" th:value="*{authorworks}" placeholder="AuthorWorks"/>
+            </div>
+        </div>
+        <div class="from-group">
+            <label for="authordots" class="col-sm-2 control-label">AuthorDots</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="authordots"  id="AuthorDots" th:value="*{authordots}" placeholder="AuthorDots"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="Submit" class="btn btn-info" />
+                &nbsp; &nbsp; &nbsp;
+                <a href="/consumer/author/toedit" th:href="@{/consumer/author/findAll}" class="btn btn-info">Back</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

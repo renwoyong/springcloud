@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yong.springcloud.dao.AuthorDao">
+
+	<select id="findAuthor" resultType="Author" parameterType="Long">
+		select 
+			authorid,
+			authorname,
+			authoremail,
+			authorsex,
+			authorincome,
+			authorintroduction,
+			authorworks,
+			authordots
+		from author where authorid=#{authorid};
+	</select>
+	<select id="findAll" resultType="Author">
+		select 
+			authorid,
+			authorname,
+			authoremail,
+			authorsex,
+			authorincome,
+			authorintroduction,
+			authorworks,
+			authordots
+		from author;
+	</select>
+	<insert id="addAuthor" parameterType="Author">
+		insert into author(
+			authorname,
+			authoremail,
+			authorsex,
+			authorincome,
+			authorintroduction,
+			authorworks,
+			authordots)
+		values(
+			#{authorname},
+			#{authoremail},
+			#{authorsex},
+			#{authorincome},
+			#{authorintroduction},
+			#{authorworks},
+			#{authordots});
+	</insert>
+	<update id="upAuthor" parameterType="Author">
+		update author set 
+			authorname=#{authorname},
+			authoremail=#{authoremail},
+			authorsex=#{authorsex},
+			authorincome=#{authorincome},
+			authorintroduction=#{authorintroduction},
+			authorworks=#{authorworks},
+			authordots=#{authordots}
+		where authorid=#{authorid};
+	</update>
+	<delete id="delAuthor" parameterType="Long">
+		delete from author where authorid=#{authorid}; 
+	</delete>
+
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yong.springcloud.dao.AdminUserDao">
+
+	<select id="findUser" resultType="AdminUser" parameterType="String">
+		select auserid,ausername,auserpwd from adminuser where ausername=#{ausername};
+	</select>
+	
+</mapper>
