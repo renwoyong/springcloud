@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yong.springcloud.dao.ChapterDao">
+
+	<select id="findChapter" resultType="Chapter" parameterType="Long">
+		select
+			chapterid,
+			bookid,
+			chaptername,
+			chaptercontent,
+			chaptercount,
+			ctime,
+			state,
+			free
+		from chapter where chapterid=#{chapterid};
+	</select>
+	
+	<select id="findChapterlist" resultType="Chapter" parameterType="Long" >
+		select
+			chapterid,
+			bookid,
+			chaptername,
+			chaptercontent,
+			chaptercount,
+			ctime,
+			state,
+			free
+		from chapter where bookid=#{bookid};
+	</select>
+	
+	<insert id="addChapter" parameterType="Chapter">
+	insert into chapter(
+			chapterid,
+			bookid,
+			chaptername,
+			chaptercontent,
+			chaptercount,
+			ctime,
+			state,
+			free)
+		values(
+			#{chapterid},
+			#{bookid},
+			#{chaptername},
+			#{chaptercontent},
+			#{chaptercount},
+			NOW(),
+			#{state},
+			#{free});
+	</insert>
+	
+	<update id="upChapter" parameterType="Chapter">
+		update chapter set
+			chapterid=#{chapterid},
+			bookid=#{bookid},
+			chaptername=#{chaptername},
+			chaptercontent=#{chaptercontent},
+			chaptercount=#{chaptercount},
+			ctime=NOW(),
+			state=#{state},
+			free=#{free}
+		where chapterid=#{chapterid};
+	</update>
+	
+	<delete id="delChapter" parameterType="Long">
+		delete from chapter where chapterid=#{chapterid};
+	</delete>
+</mapper>

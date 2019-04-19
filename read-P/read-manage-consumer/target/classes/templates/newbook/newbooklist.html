@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>新书管理</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+</head>
+<body class="container">
+<br/>
+<h1>新书列表</h1>
+<br/><br/>
+<div class="with:80%">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+        	<th>Bookid</th>
+            <th>BookName</th>
+            <th>BookAuthor</th>
+            <th>plan</th>
+            <th>isplan</th>
+            <th>noplan</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  th:each="book : ${books}">
+            <th scope="row" th:text="${book.bookid}">1</th>
+            <td th:text="${book.bookname}"></td>
+            <td th:text="${book.bookauthor}"></td>
+            <td th:text="${book.plan}"></td>
+            <td><a th:href="@{/consumer/book/upPlan(bookid=${book.bookid})}">isplan</a></td>
+            <td><a th:href="@{/consumer/book/unupPlan(bookid=${book.bookid})}">noplan</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

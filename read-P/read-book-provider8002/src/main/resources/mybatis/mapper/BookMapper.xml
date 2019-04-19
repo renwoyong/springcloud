@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yong.springcloud.dao.BookDao">
+
+	<select id="findBook" resultType="Book" parameterType="Long">
+		select 
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket
+	    from book where bookid=#{bookid};
+	</select>
+	
+	<select id="findBooklist" resultType="Book">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket
+	    from book;
+	</select>
+	
+	<insert id="addBook" parameterType="Book">
+	insert into book(
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket)
+		values(
+			#{bookname},
+			#{bookauthor},
+			#{bookintroduction},
+			#{booktype},
+			#{bookcount},
+			#{state},
+			#{ctime},
+			#{weeklyticket},
+			#{monthlyticket});
+	</insert>
+	
+	<update id="upBook" parameterType="Book">
+		update book set
+			bookname=#{bookname},
+			bookauthor=#{bookauthor},
+			bookintroduction=#{bookintroduction},
+			booktype=#{booktype},
+			bookcount=#{bookcount},
+			state=#{state},
+			ctime=#{ctime},
+			weeklyticket=#{weeklyticket},
+			monthlyticket=#{monthlyticket}
+		where bookid=#{bookid};
+	</update>
+	
+	<delete id="delBook" parameterType="Long">
+		delete from book where bookid=#{bookid};
+	</delete>
+	
+</mapper>
