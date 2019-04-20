@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yong.springcloud.dao.CommentDao">
+	<select id="findCommentlist" resultType="Comment">
+		select
+			commentid,
+			username,
+			bookid,
+			bookname,
+			context,
+			DATE_FORMAT(createdtime,'%Y-%m-%d %H:%i:%s') as createdtime
+		from comment;
+	</select>
+	
+	<select id="findComments" resultType="Comment" parameterType="String">
+		select
+			commentid,
+			username,
+			bookid,
+			bookname,
+			context,
+			DATE_FORMAT(createdtime,'%Y-%m-%d %H:%i:%s') as createdtime
+		from comment
+		where bookname=#{bookname};
+	</select>
+	
+	<delete id="delComment" parameterType="Long">
+		delete from comment where commentid=#{commentid};
+	</delete>
+</mapper>

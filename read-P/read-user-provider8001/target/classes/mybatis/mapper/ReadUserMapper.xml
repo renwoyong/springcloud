@@ -5,16 +5,72 @@
 <mapper namespace="com.yong.springcloud.dao.ReadUserDao">
 
 	<select id="findById" resultType="ReadUser" parameterType="Long">
-		select userid,username,userpwd from readuser where userid=#{userid};
+		select 
+			userid,
+			username,
+			userpwd,
+			useremail,
+			usersex,
+			readcount,
+			readpay,
+			state,
+			vipset,
+			DATE_FORMAT(starttime,'%Y-%m-%d %H:%i:%s') as starttime,
+			DATE_FORMAT(endtime,'%Y-%m-%d %H:%i:%s') as endtime 
+		from readuser 
+		where userid=#{userid};
 	</select>
 	<select id="findAll" resultType="ReadUser">
-		select userid,username,userpwd from readuser;
+		select 
+			userid,
+			username,
+			userpwd,
+			useremail,
+			usersex,
+			readcount,
+			readpay,
+			state,
+			vipset,
+			DATE_FORMAT(starttime,'%Y-%m-%d %H:%i:%s') as starttime,
+			DATE_FORMAT(endtime,'%Y-%m-%d %H:%i:%s') as endtime
+		from readuser;
 	</select>
 	<insert id="addUser" parameterType="ReadUser">
-		INSERT INTO readuser(username,userpwd) VALUES(#{username},#{userpwd});
+		INSERT INTO readuser
+		(	username,
+			userpwd,
+			useremail,
+			usersex,
+			readcount,
+			readpay,
+			state,
+			vipset,
+			starttime,
+			endtime ) 
+		VALUES(#{username},
+			   #{userpwd},
+			   #{useremail},
+			   #{usersex},
+			   #{readcount},
+			   #{readpay},
+			   #{state},
+			   #{vipset},
+			   #{starttime},
+			   #{endtime});
 	</insert>
 	<update id="upUser" parameterType="ReadUser">
-		update readuser set username=#{username},userpwd=#{userpwd} where userid=#{userid};
+		update readuser set 
+			username=#{username},
+			userpwd=#{userpwd},
+			useremail=#{useremail},
+			usersex=#{usersex},
+			readcount=#{readcount},
+			readpay=#{readpay},
+			state=#{state},
+			vipset=#{vipset},
+			starttime=#{starttime},
+			endtime=#{endtime}
+		 where userid=#{userid};
 	</update>
 	<delete id="delUser" parameterType="Long">
 		delete from readuser where userid=#{userid};

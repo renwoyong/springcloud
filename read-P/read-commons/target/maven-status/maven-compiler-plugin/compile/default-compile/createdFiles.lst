@@ -1,2 +1,13 @@
-com\yong\springcloud\service\ReadUserClientService.class
+com\yong\springcloud\entities\Chapter.class
+com\yong\springcloud\entities\Comment.class
+com\yong\springcloud\service\AdminUserClientService.class
 com\yong\springcloud\entities\ReadUser.class
+com\yong\springcloud\service\ChapterClientService.class
+com\yong\springcloud\entities\AdminUser.class
+com\yong\springcloud\entities\Book.class
+com\yong\springcloud\service\CommentClientService.class
+com\yong\springcloud\service\BookClientService.class
+com\yong\springcloud\entities\Author.class
+com\yong\springcloud\service\AuthorClientService.class
+com\yong\springcloud\service\ReadUserClientService.class
+com\yong\springcloud\service\NewBookClientService.class

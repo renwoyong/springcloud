@@ -10,32 +10,10 @@
         <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
         <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     </head>
-    <style type="text/css">
-        body {
-            padding: 20px;
-        }
-
-        .headLeft {
-            float: left;
-        }
-
-        .headRight {
-            padding-top: 40px;
-            padding-left: 340px;
-        }
-
-        .search {
-            margin-bottom: 10px;
-        }
-
-        .search .toolbar {}
-    </style>
-    <!--必须使用较新版本的BootStrap才有如下效果-->
-
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-11">
                     <nav class="navbar navbar-fixed-top" role="navigation">
                         <div class="container">
                             <div class="navbar-header">
@@ -49,18 +27,18 @@
                 </div>
             </div>
             <div class="row" style="padding-top: 45px">
-                <div class="col-md-3">
+                <div class="col-md-20">
                     <div class="list-group">
                         <!--激活，作为标题-->
-                        <a href="#" class="list-group-item active ">系统菜单</a>
+                        <a href="/consumer/menu" class="list-group-item active ">系统主页</a>
                         <a href="/consumer/readUser/list" class="list-group-item">用户管理</a>
                         <a href="/consumer/author/findAll" class="list-group-item">作者管理</a>
-                        <a href="#" class="list-group-item">书籍管理</a>
-                        <a href="#" class="list-group-item">阅读管理</a>
-                        <a href="#" class="list-group-item">新书管理</a>
+                        <a href="/consumer/book/findBooklist" class="list-group-item">书籍管理</a>
+                        <a href="/consumer/book/findNewBooklist" class="list-group-item">新书管理</a>
+                        <a href="/consumer/comment/findCommentlist" class="list-group-item">评论管理</a>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <div>
                         <ol class="breadcrumb">
                             <li><span class="glyphicon glyphicon-home"></span>&nbsp;

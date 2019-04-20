@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>评论管理</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div th:include="top::html"></div>
+         <div class="row" style="padding-top: 45px">
+             <div th:include="left::html"></div>
+             	<div class="col-md-10">
+             		<div>
+                        <ol class="breadcrumb">
+                            <li><span class="glyphicon glyphicon-home"></span>&nbsp;
+                                <a href="#">评论列表</a>
+                            </li>
+                        </ol>
+                    </div>
+                    <form class="form-horizontal"   th:action="@{/consumer/comment/findComments}"  method="get">
+						<div class="input-group col-md-3" style="margin-top:0px; margin-left:700px; positon:relative;">
+					       <input type="text" class="form-control" name="bookname" placeholder="bookname"/>
+					            <span class="input-group-btn">
+					               <button class="btn btn-info btn-search">搜索</button>
+					            </span>
+					 	</div>
+					 </form>
+                 	<div class="with:100%">
+		    			<table class="table table-hover">
+					        <thead>
+					        <tr>
+					            <th>#</th>
+					            <th>UserName</th>
+					            <th>BookId</th>
+					            <th>BookName</th>
+					            <th>ConText</th>
+					            <th>CreatedTime</th>
+					            <th>Delete</th>
+					        </tr>
+					        </thead>
+					        <tbody>
+					        <tr  th:each="comment : ${comments}">
+					            <th scope="row" th:text="${comment.commentid}">1</th>
+					            <td th:text="${comment.username}">neo</td>
+					            <td th:text="${comment.bookid}">Otto</td>
+					            <td th:text="${comment.bookname}"></td>
+					            <td th:text="${comment.context}"></td>
+					            <td th:text="${comment.createdtime}"></td>
+					            <td><a th:href="@{/consumer/comment/delComment(commentid=${comment.commentid})}">delete</a></td>
+					        </tr>
+					        </tbody>
+					    </table>
+					</div>
+             	</div>
+         </div>
+    <div th:include="footer::html"></div>
+</div>
+</body>
+</html>

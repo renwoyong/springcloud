@@ -2,40 +2,71 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>userList</title>
+    <title>用户管理</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
-<body class="container">
-<br/>
-<h1>用户列表</h1>
-<br/><br/>
-<div class="with:80%">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>UserName</th>
-            <th>Password</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr  th:each="user : ${users}">
-            <th scope="row" th:text="${user.userid}">1</th>
-            <td th:text="${user.username}">neo</td>
-            <td th:text="${user.userpwd}">Otto</td>
-            <td><a th:href="@{/consumer/readUser/toedit(userid=${user.userid})}">edit</a></td>
-            <td><a th:href="@{/consumer/readUser/delUser(userid=${user.userid})}">delete</a></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<div class="form-group">
-    <div class="col-sm-2 control-label">
-        <a href="/consumer/readUser/toadd" th:href="@{/consumer/readUser/toadd}" class="btn btn-info">add</a>
-    </div>
-</div>
+<body>
 
+<div class="container">
+    <div th:include="top::html"></div>
+         <div class="row" style="padding-top: 45px">
+             <div th:include="left::html"></div>
+             	<div class="col-md-10">
+             		<div>
+                        <ol class="breadcrumb">
+                            <li><span class="glyphicon glyphicon-home"></span>&nbsp;
+                                <a href="#">用户列表</a>
+                            </li>
+                        </ol>
+                    </div>
+                 	<div class="with:100%">
+		    			<table class="table table-hover">
+					        <thead>
+					        <tr>
+					            <th>#</th>
+					            <th>UserName</th>
+					            <th>Password</th>
+					            <th>UserEmail</th>
+					            <th>UserSex</th>
+					            <th>ReadCount</th>
+					            <th>ReadPay</th>
+					            <th>VipSet</th>
+					            <th>VipStartTime</th>
+					            <th>VipEndTime</th>
+					            <th>Edit</th>
+					            <th>Delete</th>
+					        </tr>
+					        </thead>
+					        <tbody>
+					        <tr  th:each="user : ${users}">
+					            <th scope="row" th:text="${user.userid}">1</th>
+					            <td th:text="${user.username}">neo</td>
+					            <td th:text="${user.userpwd}">Otto</td>
+					            <td th:text="${user.useremail}"></td>
+					            <td th:text="${user.usersex}"></td>
+					            <td th:text="${user.readcount}"></td>
+					            <td th:text="${user.readpay}"></td>
+					            <td th:text="${user.vipset}"></td>
+					            <!-- ${#dates.format(chapter.ctime,'yyyy/MM/dd hh:mm:ss')} -->
+					            <td th:text="${user.starttime}"></td>
+					            <td th:text="${user.endtime}"></td>
+					            <td><a th:href="@{/consumer/readUser/toedit(userid=${user.userid})}">edit</a></td>
+					            <td><a th:href="@{/consumer/readUser/delUser(userid=${user.userid})}">delete</a></td>
+					        </tr>
+					        </tbody>
+					    </table>
+					</div>
+					<div class="form-group">
+					    <div class="col-sm-2 control-label">
+					        <a href="/consumer/readUser/toadd" th:href="@{/consumer/readUser/toadd}" class="btn btn-info">add</a>
+					    </div>
+					</div>
+             	</div>
+         </div>
+    <div th:include="footer::html"></div>
+</div>
 </body>
 </html>

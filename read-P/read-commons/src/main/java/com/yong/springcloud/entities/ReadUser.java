@@ -14,5 +14,13 @@ public class ReadUser implements Serializable{
 	private Long userid;
 	private String username;
 	private String userpwd;
+	private String useremail;
+	private String usersex;
+	private Long readcount;
+	private Long readpay;
+	private String state;
+	private String vipset;
+	private String starttime;
+	private String endtime;
 	
 }

@@ -4,34 +4,51 @@
     <meta charset="UTF-8"/>
     <title>新书管理</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
-<body class="container">
-<br/>
-<h1>新书列表</h1>
-<br/><br/>
-<div class="with:80%">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-        	<th>Bookid</th>
-            <th>BookName</th>
-            <th>BookAuthor</th>
-            <th>plan</th>
-            <th>isplan</th>
-            <th>noplan</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr  th:each="book : ${books}">
-            <th scope="row" th:text="${book.bookid}">1</th>
-            <td th:text="${book.bookname}"></td>
-            <td th:text="${book.bookauthor}"></td>
-            <td th:text="${book.plan}"></td>
-            <td><a th:href="@{/consumer/book/upPlan(bookid=${book.bookid})}">isplan</a></td>
-            <td><a th:href="@{/consumer/book/unupPlan(bookid=${book.bookid})}">noplan</a></td>
-        </tr>
-        </tbody>
-    </table>
+<body>
+
+<div class="container">
+    <div th:include="top::html"></div>
+         <div class="row" style="padding-top: 45px">
+             <div th:include="left::html"></div>
+             	<div class="col-md-10">
+             		<div>
+                        <ol class="breadcrumb">
+                            <li><span class="glyphicon glyphicon-home"></span>&nbsp;
+                                <a href="#">新书列表</a>
+                            </li>
+                        </ol>
+                    </div>
+                 	<div class="with:100%">
+		    			<table class="table table-hover">
+					        <thead>
+					        <tr>
+					        	<th>Bookid</th>
+					            <th>BookName</th>
+					            <th>BookAuthor</th>
+					            <th>plan</th>
+					            <th>isplan</th>
+					            <th>noplan</th>
+					        </tr>
+					        </thead>
+					        <tbody>
+					        <tr  th:each="book : ${books}">
+					            <th scope="row" th:text="${book.bookid}">1</th>
+					            <td th:text="${book.bookname}"></td>
+					            <td th:text="${book.bookauthor}"></td>
+					            <td th:text="${book.plan}"></td>
+					            <td><a th:href="@{/consumer/book/upPlan(bookid=${book.bookid})}">isplan</a></td>
+					            <td><a th:href="@{/consumer/book/unupPlan(bookid=${book.bookid})}">noplan</a></td>
+					        </tr>
+					        </tbody>
+					    </table>
+					</div>
+             	</div>
+         </div>
+    <div th:include="footer::html"></div>
 </div>
 </body>
 </html>

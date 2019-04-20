@@ -24,7 +24,7 @@ public class AdminUserConsumerController {
 		return "adminuser/login";
 	}
 	
-	@RequestMapping(value="consumer/adminuser/findUser")
+	@RequestMapping(value="/consumer/adminuser/findUser")
 	public String findUser( AdminUser loginUser) throws Exception
 	{
 		if (loginUser.getAusername() == null) {
@@ -41,7 +41,7 @@ public class AdminUserConsumerController {
 			{
 				return "adminuser/error";
 			}
-			return "menu";
+			return "redirect:/consumer/menu";
 		}
 		else {
 			return "adminuser/error";
@@ -49,5 +49,22 @@ public class AdminUserConsumerController {
 		
 	}
 	
+	@RequestMapping(value="/consumer/menu")
+	public String menu()
+	{
+		return "menu";
+	}
+	
+	@RequestMapping(value="/consumer/left")
+	public String left()
+	{
+		return "left";
+	}
+	
+	@RequestMapping(value="/consumer/top")
+	public String top()
+	{
+		return "top";
+	}
 	
 }

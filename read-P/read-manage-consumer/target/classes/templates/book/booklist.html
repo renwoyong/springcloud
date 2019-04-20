@@ -4,47 +4,64 @@
     <meta charset="UTF-8"/>
     <title>书籍管理</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
-<body class="container">
-<br/>
-<h1>文学列表</h1>
-<br/><br/>
-<div class="with:80%">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>BookId</th>
-            <th>BookName</th>
-            <th>BookAuthor</th>
-            <th>BookType</th>
-            <th>BookIntroduction</th>
-            <th>BookCount</th>
-            <th>state</th>
-            <th>edit</th>
-            <th>delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr  th:each="book : ${books}">
-            <th scope="row" th:text="${book.bookid}">1</th>
-            <!-- <td th:text="${book.bookname}"></td> -->
-            <td><a th:text="${book.bookname}" th:href="@{/consumer/chapter/findChapterlist(bookid=${book.bookid})}"></a></td>
-            <td th:text="${book.bookauthor}"></td>
-            <td th:text="${book.booktype}"></td>
-            <td th:text="${book.bookintroduction}"></td>
-            <td th:text="${book.bookcount}"></td>
-            <td th:text="${book.state}"></td>
-            <td><a th:href="@{/consumer/book/toedit(bookid=${book.bookid})}">edit</a></td>
-            <td><a th:href="@{/consumer/book/delbook(bookid=${book.bookid})}">delete</a></td>
-        </tr>
-        </tbody>
-    </table>
+<body >
+<div class="container">
+    <div th:include="top::html"></div>
+         <div class="row" style="padding-top: 45px">
+             <div th:include="left::html"></div>
+             	<div class="col-md-10">
+             		<div>
+                        <ol class="breadcrumb">
+                            <li><span class="glyphicon glyphicon-home"></span>&nbsp;
+                                <a href="#">书籍列表</a>
+                            </li>
+                        </ol>
+                    </div>
+                 	<div class="with:100%">
+		    			<table class="table table-hover">
+					        <thead>
+					       		<tr>
+					            <th>BookId</th>
+					            <th>BookName</th>
+					            <th>BookAuthor</th>
+					            <th>BookType</th>
+					            <th>BookIntroduction</th>
+					            <th>BookCount</th>
+					            <th>state</th>
+					            <th>edit</th>
+					            <th>delete</th>
+					        	</tr>
+					        </thead>
+					        <tbody>
+					        <tr  th:each="book : ${books}">
+					            <th scope="row" th:text="${book.bookid}">1</th>
+					            <!-- <td th:text="${book.bookname}"></td> -->
+					            <td><a th:text="${book.bookname}" th:href="@{/consumer/chapter/findChapterlist(bookid=${book.bookid})}"></a></td>
+					            <td th:text="${book.bookauthor}"></td>
+					            <td th:text="${book.booktype}"></td>
+					            <td>
+					            	<div class="content" th:text="${book.bookintroduction}" style="width:150px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;"></div>
+					            </td>
+					            <td th:text="${book.bookcount}"></td>
+					            <td th:text="${book.state}"></td>
+					            <td><a th:href="@{/consumer/book/toedit(bookid=${book.bookid})}">edit</a></td>
+					            <td><a th:href="@{/consumer/book/delbook(bookid=${book.bookid})}">delete</a></td>
+					        </tr>
+					        </tbody>
+		    			</table>
+					</div>
+					<div class="form-group">
+					    <div class="col-sm-2 control-label">
+					        <a href="/consumer/book/toadd" th:href="@{/consumer/book/toadd}" class="btn btn-info">add</a>
+					    </div>
+					</div>
+             	</div>
+         </div>
+    <div th:include="footer::html"></div>
 </div>
-<div class="form-group">
-    <div class="col-sm-2 control-label">
-        <a href="/consumer/book/toadd" th:href="@{/consumer/book/toadd}" class="btn btn-info">add</a>
-    </div>
-</div>
-
 </body>
 </html>

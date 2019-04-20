@@ -4,53 +4,70 @@
     <meta charset="UTF-8"/>
     <title>章节管理</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
-<body class="container">
-<br/>
-<h1>添加章节</h1>
-<br/><br/>
-<div class="with:80%">
-    <form class="form-horizontal"   th:action="@{/consumer/chapter/add}"  method="post">
-        <div class="form-group">
-            <label for="chaptername" class="col-sm-2 control-label">ChapterName</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="chaptername"  id="ChapterName" placeholder="ChapterName"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="chaptercontent" class="col-sm-2 control-label" >ChapterContent</label>
-            <div class="col-sm-10">
-                <!--  <input type="text" class="form-control" name="chaptercontent" id="ChapterContent" placeholder="ChapterContent" style="height:800px;"/>-->
-                <textarea   rows="" cols="" class="form-control" name="chaptercontent" style="height:800px;"></textarea>
-            </div>
-        </div>
-       <div class="from-group">
-            <label for="bookid" class="col-sm-2 control-label">BookId</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="bookid"  id="BookId" placeholder="BookId"/>
-            </div>
-        </div>
-        <div class="from-group">
-            <label for="chaptercount" class="col-sm-2 control-label">ChapterCount</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="chaptercount"  id="ChapterCount" placeholder="ChapterCount"/>
-            </div>
-        </div>
-        <div class="from-group">
-            <label for="free" class="col-sm-2 control-label">Free</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="free"  id="Free" placeholder="Free"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <input type="submit" value="Submit" class="btn btn-info" />
-                &nbsp; &nbsp; &nbsp;
-                <input type="reset" value="Reset" class="btn btn-info" />
-            </div>
+<body>
 
-        </div>
-    </form>
+<div class="container">
+    <div th:include="top::html"></div>
+         <div class="row" style="padding-top: 45px">
+             <div th:include="left::html"></div>
+             	<div class="col-md-10">
+             		<div>
+                        <ol class="breadcrumb">
+                            <li><span class="glyphicon glyphicon-home"></span>&nbsp;
+                                <a href="#">添加章节</a>
+                            </li>
+                        </ol>
+                    </div>
+                 	<div class="with:100%">
+		    			<form class="form-horizontal"   th:action="@{/consumer/chapter/add}"  method="post">
+					        <div class="form-group">
+					            <label for="chaptername" class="col-sm-2 control-label">ChapterName</label>
+					            <div class="col-sm-10">
+					                <input type="text" class="form-control" name="chaptername"  id="ChapterName" placeholder="ChapterName"/>
+					            </div>
+					        </div>
+					        <div class="form-group">
+					            <label for="chaptercontent" class="col-sm-2 control-label" >ChapterContent</label>
+					            <div class="col-sm-10">
+					                <!--  <input type="text" class="form-control" name="chaptercontent" id="ChapterContent" placeholder="ChapterContent" style="height:800px;"/>-->
+					                <textarea   rows="" cols="" class="form-control" name="chaptercontent" style="height:800px;"></textarea>
+					            </div>
+					        </div>
+					       <div class="from-group">
+					            <label for="bookid" class="col-sm-2 control-label">BookId</label>
+					            <div class="col-sm-10">
+					                <input type="text" class="form-control" name="bookid"  id="BookId" placeholder="BookId"/>
+					            </div>
+					        </div>
+					        <div class="from-group">
+					            <label for="chaptercount" class="col-sm-2 control-label">ChapterCount</label>
+					            <div class="col-sm-10">
+					                <input type="text" class="form-control" name="chaptercount"  id="ChapterCount" placeholder="ChapterCount"/>
+					            </div>
+					        </div>
+					        <div class="from-group">
+					            <label for="free" class="col-sm-2 control-label">Free</label>
+					            <div class="col-sm-10">
+					                <input type="text" class="form-control" name="free"  id="Free" placeholder="Free"/>
+					            </div>
+					        </div>
+					        <div class="form-group">
+					            <div class="col-sm-offset-2 col-sm-10">
+					                <input type="submit" value="Submit" class="btn btn-info" />
+					                &nbsp; &nbsp; &nbsp;
+					                <input type="reset" value="Reset" class="btn btn-info" />
+					            </div>
+					
+					        </div>
+					    </form>
+					</div>
+             	</div>
+         </div>
+    <div th:include="footer::html"></div>
 </div>
 </body>
 </html>

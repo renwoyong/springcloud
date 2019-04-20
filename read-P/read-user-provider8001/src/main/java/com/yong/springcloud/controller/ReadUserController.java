@@ -40,7 +40,8 @@ public class ReadUserController {
 	  public boolean upuser(@RequestBody ReadUser user) {
 		  return service.upuser(user);
 	  }
-	  @RequestMapping(value="readUser/delUser/{userid}",method=RequestMethod.POST)
+	  
+	  @RequestMapping(value="/readUser/delUser/{userid}",method=RequestMethod.POST)
 	  public boolean delUser(@PathVariable("userid") Long userid)
 	  {
 		  return  service.delUser(userid);
