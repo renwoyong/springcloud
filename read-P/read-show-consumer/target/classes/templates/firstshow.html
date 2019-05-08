@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>九零看书网</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}" />
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row" th:include="toper::html"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2">
+		        <div class="list-group">
+		            <a href="/consumer/book/findSubBook1" class="list-group-item">穿越小说</a>
+		            <a href="/consumer/book/findSubBook2" class="list-group-item">历史架空</a>
+		            <a href="/consumer/book/findSubBook3" class="list-group-item">总裁豪门</a>
+		            <a href="/consumer/book/findSubBook4" class="list-group-item">言情小说</a>
+		            <a href="/consumer/book/findSubBook5" class="list-group-item">玄幻魔法</a>
+		            <a href="/consumer/book/findSubBook6" class="list-group-item">都市异能</a>
+		            <a href="/consumer/book/findSubBook7" class="list-group-item">历史军事</a>
+		            <a href="/consumer/book/findSubBook8" class="list-group-item">网游小说</a>
+		        </div>
+		    </div>
+		    <div class="col-md-8">
+		    <table class="table table-hover">
+		        <!-- <thead>
+		       		<tr>
+		            <th>BookName</th>
+		            <th>BookType</th>
+		        	</tr>
+		        </thead> -->
+		        <tbody>
+		        <tr  th:each="book : ${books}">
+		            <td><a th:text="${book.bookname}" th:href="@{/consumer/findbookshow(bookid=${book.bookid})}"></a></td>
+		            <td th:text="${book.booktype}"></td>
+		        </tr>
+		        </tbody>
+	  			</table>
+	  			<nav aria-label="...">
+				  <ul class="pager">
+				    <li><a th:if="${pagenum} gt 1"  th:href="@{/consumer/book/findSubBook(pagenum=${pagenum-1})}">Previous</a></li>
+				    <li><span th:text="${pagenum}+'/'+${pagecount}">1/20</span></li>
+				    <li><a th:if="${pagenum} lt ${pagecount}" th:href="@{/consumer/book/findSubBook(pagenum=${pagenum+1})}">Next</a></li>
+				  </ul>
+				</nav>
+		    </div>
+		    <div class="col-md-2">
+		    <h4>新书推广</h4>
+		    </div>
+	    </div>
+	    <div class="row" th:include="footer::html"></div>
+    </div>
+</div>
+</body>
+</html>

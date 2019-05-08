@@ -9,7 +9,7 @@
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <div th:include="top::html"></div>
          <div class="row" style="padding-top: 45px">
              <div th:include="left::html"></div>
@@ -59,7 +59,7 @@
 				            <div class="col-sm-offset-2 col-sm-10">
 				                <input type="submit" value="Submit" class="btn btn-info" />
 				                &nbsp; &nbsp; &nbsp;
-				                <a href="/consumer/chapter/findChapterlist" th:href="@{/consumer/chapter/findChapterlist}" class="btn btn-info">Back</a>
+				                <a th:href="@{/consumer/chapter/findChapterlist?bookid=}+${chapter.bookid}" class="btn btn-info">Back</a>
 				            </div>
 				
 				        </div>

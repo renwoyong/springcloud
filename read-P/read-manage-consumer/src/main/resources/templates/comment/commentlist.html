@@ -8,9 +8,9 @@
     <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="overflow-y:scroll">
 
-<div class="container">
+<div class="container-fluid">
     <div th:include="top::html"></div>
          <div class="row" style="padding-top: 45px">
              <div th:include="left::html"></div>
@@ -51,7 +51,7 @@
 					            <td th:text="${comment.bookname}"></td>
 					            <td th:text="${comment.context}"></td>
 					            <td th:text="${comment.createdtime}"></td>
-					            <td><a th:href="@{/consumer/comment/delComment(commentid=${comment.commentid})}">delete</a></td>
+					            <td><a class="btn btn-default" th:href="@{/consumer/comment/delComment(commentid=${comment.commentid})}">delete</a></td>
 					        </tr>
 					        </tbody>
 					    </table>

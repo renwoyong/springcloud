@@ -8,8 +8,8 @@
     <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
-<body>
-<div class="container">
+<body style="overflow-y:scroll">
+<div class="container-fluid">
     <div th:include="top::html"></div>
          <div class="row" style="padding-top: 45px">
              <div th:include="left::html"></div>
@@ -49,8 +49,8 @@
 					            <td th:text="${chapter.chaptercount}"></td>
 					            <td th:text="${#dates.format(chapter.ctime,'yyyy/MM/dd hh:mm:ss')}"></td>
 					            <td th:text="${chapter.free}"></td>
-					            <td><a th:href="@{/consumer/chapter/toedit(chapterid=${chapter.chapterid})}">edit</a></td>
-					            <td><a th:href="@{/consumer/chapter/delete(chapterid=${chapter.chapterid})}">delete</a></td>
+					            <td><a class="btn btn-default" th:href="@{/consumer/chapter/toedit(chapterid=${chapter.chapterid})}">edit</a></td>
+					            <td><a class="btn btn-default" th:href="@{/consumer/chapter/delete(chapterid=${chapter.chapterid})}">delete</a></td>
 					        </tr>
 					        </tbody>
 					    </table>

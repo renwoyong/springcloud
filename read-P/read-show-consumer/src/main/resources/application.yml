@@ -1,0 +1,23 @@
+server:
+  port: 8003
+eureka:
+  client:
+    register-with-eureka: false
+    service-url: 
+      defaultZone: http://eureka7001.com:7001/eureka/
+ 
+spring:
+  application:
+    name: sr-show-consumer
+  thymeleaf:
+   prefix: classpath:/templates/
+   suffix: .html
+   mode: HTML5
+   encoding: UTF-8
+   cache: false
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql

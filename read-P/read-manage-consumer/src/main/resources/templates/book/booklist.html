@@ -8,8 +8,8 @@
     <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
-<body >
-<div class="container">
+<body style="overflow-y:scroll">
+<div class="container-fluid">
     <div th:include="top::html"></div>
          <div class="row" style="padding-top: 45px">
              <div th:include="left::html"></div>
@@ -22,7 +22,7 @@
                         </ol>
                     </div>
                  	<div class="with:100%">
-		    			<table class="table table-hover">
+		    			<table class="table table-hover table-condensed">
 					        <thead>
 					       		<tr>
 					            <th>BookId</th>
@@ -48,8 +48,8 @@
 					            </td>
 					            <td th:text="${book.bookcount}"></td>
 					            <td th:text="${book.state}"></td>
-					            <td><a th:href="@{/consumer/book/toedit(bookid=${book.bookid})}">edit</a></td>
-					            <td><a th:href="@{/consumer/book/delbook(bookid=${book.bookid})}">delete</a></td>
+					            <td><a class="btn btn-default" th:href="@{/consumer/book/toedit(bookid=${book.bookid})}">edit</a></td>
+					            <td><a class="btn btn-default" th:href="@{/consumer/book/delbook(bookid=${book.bookid})}">delete</a></td>
 					        </tr>
 					        </tbody>
 		    			</table>

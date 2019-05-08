@@ -29,22 +29,53 @@
 		from author;
 	</select>
 	<insert id="addAuthor" parameterType="Author">
-		insert into author(
+		insert into author
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="authorname != null">
 			authorname,
+		</if>
+		<if test="authoremail != null">
 			authoremail,
+		</if>
+		<if test="authorsex != null">
 			authorsex,
+		</if>
+		<if test="authorincome != null">
 			authorincome,
+		</if>
+		<if test="authorintroduction != null">
 			authorintroduction,
+		</if>
+		<if test="authorworks != null">
 			authorworks,
-			authordots)
-		values(
-			#{authorname},
-			#{authoremail},
-			#{authorsex},
-			#{authorincome},
-			#{authorintroduction},
-			#{authorworks},
-			#{authordots});
+		</if>
+		<if test="authordots != null">
+			authordots,
+		</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="authorname!= null" >
+			#{authorname,jdbcType=VARCHAR},
+		</if>
+		<if test="authoremail!= null" >
+			#{authoremail,jdbcType=VARCHAR},
+		</if>
+		<if test="authorsex!= null" >
+			#{authorsex,jdbcType=VARCHAR},
+		</if>
+		<if test="authorincome!= null" >
+			#{authorincome,jdbcType=BIGINT},
+		</if>
+		<if test="authorintroduction!= null" >
+			#{authorintroduction,jdbcType=VARCHAR},
+		</if>
+		<if test="authorworks!= null" >
+			#{authorworks,jdbcType=VARCHAR},
+		</if>
+		<if test="authordots!= null" >
+			#{authordots,jdbcType=BIGINT},
+		</if>
+		</trim>
 	</insert>
 	<update id="upAuthor" parameterType="Author">
 		update author set 

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>九零看书网</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}" />
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row" th:include="toper::html"></div>
+	<div class="container" style="width:990px">
+		<div align="center">  
+         <!--  <table>            
+              <tr> <td align="center"><span th:text="${chapter.chaptername}"></span> </td> </tr>  
+              <tr> <td th:text="${content}"></td> </tr>  
+          </table> -->
+          <h2 align="center" th:text="${bookname}"></h2>
+          <h3 align="left" th:text="第+${mark}+章：+${chapter.chaptername}"></h3>
+          <pre align="left" style="white-space:pre-wrap;word-wrap:break-word;font-size:16px;font-family:微软雅黑">
+          	<div th:text="${chapter.chaptercontent}"></div>
+          </pre>
+          <div align="center">
+          <a class="btn btn-default" th:href="@{/consumer/chapter/findChapter(chapterid=${chapterpre.chapterid})}">上一章</a>
+          <a class="btn btn-default" th:href="@{/consumer/findbookshow(bookid=${chapter.bookid})}">目录</a>
+          <a class="btn btn-default" th:href="@{/consumer/chapter/findChapter(chapterid=${chapternext.chapterid})}">下一章</a>
+          </div>
+        </div>  
+	</div>
+    <div class="row" th:include="footer::html"></div>
+</div>
+</body>
+</html>

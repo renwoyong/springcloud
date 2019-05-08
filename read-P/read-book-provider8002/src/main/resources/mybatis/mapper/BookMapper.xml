@@ -75,4 +75,183 @@
 		delete from book where bookid=#{bookid};
 	</delete>
 	
+	<select id="findSubBookList" resultType="Book" parameterType="Integer">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket
+	    from book
+	    where bookid
+	    LIMIT #{pagenum},10;
+	</select>
+	<select id="findSubBookCount" resultType="Integer">
+		SELECT count(*) from book;
+	</select>
+	
+	<select id="findSubBookList1" resultType="Book" parameterType="Integer">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket
+	    from book
+	    where booktype like '%穿%越%'
+	    LIMIT #{pagenum},10;
+	</select>
+	<select id="findSubBookCount1" resultType="Integer">
+		SELECT count(*) from book where booktype like '%穿%越%';
+	</select>
+	
+	<select id="findSubBookList2" resultType="Book" parameterType="Integer">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket
+	    from book
+	    where booktype like '%历%史%架%空%'
+	    LIMIT #{pagenum},10;
+	</select>
+	<select id="findSubBookCount2" resultType="Integer">
+		SELECT count(*) from book where booktype like '%历%史%架%空%';
+	</select>
+	
+	<select id="findSubBookList3" resultType="Book" parameterType="Integer">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket
+	    from book
+	    where booktype like '%总%裁%豪%门%'
+	    LIMIT #{pagenum},10;
+	</select>
+	<select id="findSubBookCount3" resultType="Integer">
+		SELECT count(*) from book where booktype like '%总%裁%豪%门%';
+	</select>
+	
+	<select id="findSubBookList4" resultType="Book" parameterType="Integer">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket
+	    from book
+	    where booktype like '%言%情%'
+	    LIMIT #{pagenum},10;
+	</select>
+	<select id="findSubBookCount4" resultType="Integer">
+		SELECT count(*) from book where booktype like '%言%情%';
+	</select>
+	
+	<select id="findSubBookList5" resultType="Book" parameterType="Integer">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket
+	    from book
+	    where booktype like '%玄%幻%魔%法%'
+	    LIMIT #{pagenum},10;
+	</select>
+	<select id="findSubBookCount5" resultType="Integer">
+		SELECT count(*) from book where booktype like '%玄%幻%魔%法%';
+	</select>
+	
+	<select id="findSubBookList6" resultType="Book" parameterType="Integer">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket
+	    from book
+	    where booktype like '%都%市%异%能%'
+	    LIMIT #{pagenum},10;
+	</select>
+	<select id="findSubBookCount6" resultType="Integer">
+		SELECT count(*) from book where booktype like '%都%市%异%能%';
+	</select>
+	
+	<select id="findSubBookList7" resultType="Book" parameterType="Integer">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket
+	    from book
+	    where booktype like '%历%史%军%事%'
+	    LIMIT #{pagenum},10;
+	</select>
+	<select id="findSubBookCount7" resultType="Integer">
+		SELECT count(*) from book where booktype like '%历%史%军%事%';
+	</select>
+	
+	<select id="findSubBookList8" resultType="Book" parameterType="Integer">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket
+	    from book
+	    where booktype like '%网%游%'
+	    LIMIT #{pagenum},10;
+	</select>
+	<select id="findSubBookCount8" resultType="Integer">
+		SELECT count(*) from book where booktype like '%网%游%';
+	</select>
 </mapper>

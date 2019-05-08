@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>书籍管理</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}" />
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container" style="width:990px">
+<ul id="ul1" class="nav navbar-nav">
+	
+</ul>
+</div>
+<input type="button" value="add" onclick="add()"/>
+<script>
+function add(){
+for(var i=10;i > 0;i--){
+	var ul1 = document.getElementById("ul1") ;
+	var li1 = document.createElement("li") ;
+	var a1 ="<a th:text="b"></a>";
+	li1.innerHTML = a1;
+	li1.setAttribute('style','width:300px;float:left;margin-right:20px;line-height:20px;');
+	ul1.appendChild(li1) ;
+	}
+}
+</script>
+</body>
+</html>

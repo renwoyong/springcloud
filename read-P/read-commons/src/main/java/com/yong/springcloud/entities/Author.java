@@ -15,7 +15,7 @@ public class Author implements Serializable{
 	private String authorname;
 	private String authoremail;
 	private String authorsex;
-	private int authorincome;
+	private Long authorincome;
 	private String authorintroduction;
 	private String authorworks;
 	private Long authordots;

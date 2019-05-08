@@ -11,9 +11,10 @@
         <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-11">
+        <div class="container-fluid">
+         <div  th:include="top::html"></div>
+           <!--  <div class="row">
+                <div class="col-md-12">
                     <nav class="navbar navbar-fixed-top" role="navigation">
                         <div class="container">
                             <div class="navbar-header">
@@ -25,9 +26,10 @@
                         </div>
                     </nav>
                 </div>
-            </div>
+            </div> -->
+            
             <div class="row" style="padding-top: 45px">
-                <div class="col-md-20">
+                <div class="col-md-2">
                     <div class="list-group">
                         <!--激活，作为标题-->
                         <a href="/consumer/menu" class="list-group-item active ">系统主页</a>
@@ -44,10 +46,9 @@
                             <li><span class="glyphicon glyphicon-home"></span>&nbsp;
                                 <a href="#">主页</a>
                             </li>
-                            <li class="active"></li>
                         </ol>
                     </div>
-                    <div align="center" style="padding-top: 50px;">
+                    <div align="center" style="padding-top: 100px;">
                         <h1>九零看书后台管理系统</h1>
                     </div>
                 </div>
