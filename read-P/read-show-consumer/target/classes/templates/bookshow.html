@@ -18,15 +18,15 @@
 		<span><a><font th:text="${book.bookauthor}" size="5"></font></a><font size="5"> 著</font></span>
 	</h1>
 	<h4 th:text="${book.booktype}"></h4>
-	<button type="button" class="btn btn-default">开始阅读</button>
-	<button type="button" class="btn btn-default">投推荐票</button>
-	<button type="button" class="btn btn-default">点赞</button>
+	<a type="button" class="btn btn-default" th:href="@{/consumer/chapter/findChapter(chapterid=${chapter1.chapterid})}">开始阅读</a>
+	<a type="button" class="btn btn-default" th:href="@{/show/dots(bookid=${book.bookid})}">点赞</a>
+	<a type="button" class="btn btn-default" th:href="@{/show/download(bookid=${book.bookid})}">VIP下载</a>
 	</div>
 	<div class="container" style="width:990px">
 	<ul id="myTab" class="nav nav-tabs">
 		<li><a href="#info" data-toggle="tab">作品信息</a></li>
 		<li><a href="#calo" data-toggle="tab">目录</a></li>
-		<li><a href="#content" data-toggle="tab">作品评论</a></li>
+		<li><a th:href="@{/consumer/comment/findshowcomments(bookid=${book.bookid})}">作品评论</a></li>
 	</ul>
 	<div id="myTabContent" class="tab-content">
 		<div class="tab-pane" id="info">
@@ -41,20 +41,28 @@
                  </tr>  
              </table>
 		</div>
-		<div class="tab-pane" id="content">
+		<!-- <div class="tab-pane" id="content">
 			<p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple 
 				TV。iOS 派生自 OS X 啊哈</p>
-		</div>
+		</div> -->
 	</div>
     </div>
     <div class="row" th:include="footer::html"></div>
 </div>
-<script>
+<script >
 $(function () {
-    $('#myTab a:first').tab('show');
+	var url =location.search;
+	if(url.indexOf("flag")>0){
+		alert("下载成功");
+	}
+	if(url.indexOf("error")>0){
+		alert("未登陆或不是VIP");
+	}
+  $('#myTab a:first').tab('show');
   $('#myTab a').click(function (e) {
-  e.preventDefault();
-  $(this).tab('show');
+	 // e.preventDefault();
+	  $(this).tab('show');
+  })
 })
 </script>
 </body>

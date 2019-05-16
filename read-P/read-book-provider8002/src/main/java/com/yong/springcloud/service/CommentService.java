@@ -11,4 +11,11 @@ public interface CommentService {
 	public List<Comment> findComments(String bookname);
 	
 	public boolean delComment(Long commentid);
+	
+	//增加评论
+	public boolean addComment(Comment comment);
+	//前台评论列表
+	public List<Comment> findshowComments(Long bookid);
+	//修改评论
+	public boolean upComment(Comment comment);
 }

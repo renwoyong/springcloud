@@ -29,4 +29,39 @@
 	<delete id="delComment" parameterType="Long">
 		delete from comment where commentid=#{commentid};
 	</delete>
+	
+	<insert id="addComment" parameterType="Comment">
+	insert into comment(
+			username,
+			bookid,
+			bookname,
+			context,
+			createdtime)
+		values(
+			#{username},
+			#{bookid},
+			#{bookname},
+			#{context},
+			NOW());
+	</insert>
+	
+	<select id="findshowComments" resultType="Comment" parameterType="Long">
+		select
+			commentid,
+			username,
+			bookid,
+			bookname,
+			context,
+			DATE_FORMAT(createdtime,'%Y-%m-%d %H:%i:%s') as createdtime
+		from comment
+		where bookid=#{bookid};
+	</select>
+	
+	<update id="upComment" parameterType="Comment">
+		update comment set
+			context=#{context},
+			createdtime=NOW()
+		where commentid=#{commentid} and username=#{username} and bookid=#{bookid};
+	</update>
+	
 </mapper>

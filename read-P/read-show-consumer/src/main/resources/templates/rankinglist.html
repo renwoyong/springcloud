@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>榜单</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row" th:include="toper::html"></div>
+	<div class="container" style="width:990px">
+		<div class="row" style="width:330px;float:left;">
+			<h4>周榜</h4>
+			<table>
+		    	<tr th:each="weekbook : ${weekbooks}">
+		    	<td><a th:text="${weekbook.bookname}" th:href="@{/consumer/findbookshow(bookid=${weekbook.bookid})}"></a></td>
+		    	</tr>
+		    </table>
+		</div>
+		<div class="row" style="width:330px;float:left;">
+		<h4>月榜</h4>
+		<table>
+	    	<tr th:each="monthbook : ${monthbooks}">
+	    	<td><a th:text="${monthbook.bookname}" th:href="@{/consumer/findbookshow(bookid=${monthbook.bookid})}"></a></td>
+	    	</tr>
+	    </table>
+		</div>
+		<div class="row" style="width:330px;float:left;">
+		<h4>年榜</h4>
+		<table>
+	    	<tr th:each="yearbook : ${yearbooks}">
+	    	<td><a th:text="${yearbook.bookname}" th:href="@{/consumer/findbookshow(bookid=${yearbook.bookid})}"></a></td>
+	    	</tr>
+	    </table>
+		</div>
+	</div>
+    <div class="row" th:include="footer::html"></div>
+</div>
+</body>
+</html>

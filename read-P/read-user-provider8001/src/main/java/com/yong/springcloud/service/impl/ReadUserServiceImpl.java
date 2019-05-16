@@ -37,4 +37,11 @@ public class ReadUserServiceImpl implements ReadUserService{
 	{
 		return dao.delUser(userid);
 	}
+
+	@Override
+	public ReadUser findUser(String username) {
+		
+		return dao.findUser(username);
+	}
+	
 }

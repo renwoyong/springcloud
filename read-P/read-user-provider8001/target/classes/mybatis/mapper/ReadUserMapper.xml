@@ -36,27 +36,53 @@
 		from readuser;
 	</select>
 	<insert id="addUser" parameterType="ReadUser">
-		INSERT INTO readuser
-		(	username,
+		insert into readuser
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="username != null">
+			username,
+		</if>
+		<if test="userpwd != null">
 			userpwd,
+		</if>
+		<if test="useremail != null">
 			useremail,
+		</if>
+		<if test="usersex != null">
 			usersex,
+		</if>
+		<if test="readcount != null">
 			readcount,
+		</if>
+		<if test="readpay != null">
 			readpay,
+		</if>
+		<if test="state != null">
 			state,
-			vipset,
-			starttime,
-			endtime ) 
-		VALUES(#{username},
-			   #{userpwd},
-			   #{useremail},
-			   #{usersex},
-			   #{readcount},
-			   #{readpay},
-			   #{state},
-			   #{vipset},
-			   #{starttime},
-			   #{endtime});
+		</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="username!= null" >
+			#{username,jdbcType=VARCHAR},
+		</if>
+		<if test="userpwd!= null" >
+			#{userpwd,jdbcType=VARCHAR},
+		</if>
+		<if test="useremail!= null" >
+			#{useremail,jdbcType=VARCHAR},
+		</if>
+		<if test="usersex!= null" >
+			#{usersex,jdbcType=VARCHAR},
+		</if>
+		<if test="readcount!= null" >
+			#{readcount,jdbcType=BIGINT},
+		</if>
+		<if test="readpay!= null" >
+			#{readpay,jdbcType=BIGINT},
+		</if>
+		<if test="state!= null" >
+			#{state,jdbcType=VARCHAR},
+		</if>
+		</trim>
 	</insert>
 	<update id="upUser" parameterType="ReadUser">
 		update readuser set 
@@ -75,5 +101,22 @@
 	<delete id="delUser" parameterType="Long">
 		delete from readuser where userid=#{userid};
 	</delete>
+	
+	<select id="findUser" resultType="ReadUser" parameterType="String">
+		select 
+			userid,
+			username,
+			userpwd,
+			useremail,
+			usersex,
+			readcount,
+			readpay,
+			state,
+			vipset,
+			DATE_FORMAT(starttime,'%Y-%m-%d %H:%i:%s') as starttime,
+			DATE_FORMAT(endtime,'%Y-%m-%d %H:%i:%s') as endtime 
+		from readuser 
+		where username=#{username};
+	</select>
 
 </mapper>

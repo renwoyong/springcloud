@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>个人信息</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row" th:include="toper::html"></div>
+	<div class="container" style="width:990px">
+		<h3>个人信息</h3>
+		<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)} "></p>
+		<div class="form-group">
+             <label th:text="账户：+${readuser.username}" style="display:inline;">账户：</label>
+         </div>
+         <div class="form-group">
+             <label th:text="密码：+${readuser.userpwd}" style="display:inline;">密码：</label>
+         </div>
+         <div class="form-group">
+             <label th:text="邮箱：+${readuser.useremail}" style="display:inline;">邮箱：</label>
+         </div>
+         <div class="form-group">
+             <label th:text="性别：+${readuser.usersex}" style="display:inline;">性别：</label>
+         </div>
+         <div class="form-group">
+             <label th:text="阅读量：+${readuser.readcount}" style="display:inline;">阅读量：</label>
+         </div>
+         <div class="form-group">
+             <label th:text="费用：+${readuser.readpay}" style="display:inline;">费用：</label>
+         </div>
+         <div class="form-group">
+             <label th:if="${readuser.vipset=='1'}" th:text="VIP：VIP用户" style="display:inline;">VIP：</label>
+             <label th:if="${readuser.vipset==null||readuser.vipset=='0'}" th:text="VIP：普通用户" style="display:inline;">VIP：</label>
+         </div>
+         <div class="form-group" th:if="${readuser.vipset=='1'}">
+             <label th:text="VIP开始时间：+${readuser.starttime}" style="display:inline;">VIP开始时间：</label>
+         </div>
+         <div class="form-group" th:if="${readuser.vipset=='1'}">
+             <label th:text="VIP结束时间：+${readuser.endtime}" style="display:inline;">VIP结束时间：</label>
+         </div>
+         <a th:if="${readuser.userid!=null}" class="btn btn-primary" th:href="@{/show/readuserinfotoedit(userid=${readuser.userid})}">修改信息</a>
+         <a th:if="${readuser.userid!=null}" class="btn btn-primary">申请VIP</a>
+	</div>
+    <div class="row" th:include="footer::html"></div>
+</div>
+</body>
+</html>

@@ -54,5 +54,15 @@ public interface BookDao {
 	public List<Book> findSubBookList8(Integer pagenum);
 	
 	public Integer findSubBookCount8();
+	//主页查询
+	public  List<Book> findsomeBooks(String thekey,Integer pagenum);
+	
+	public Integer findsomeBooksCount(String thekey);
+	
+	public List<Book> findweekBookList();
+	
+	public List<Book> findmonthBookList();
+	
+	public List<Book> findyearBookList();
 	
 }

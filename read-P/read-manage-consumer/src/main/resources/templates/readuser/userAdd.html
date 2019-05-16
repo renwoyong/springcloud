@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8"/>
     <title>用户管理</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
-    <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.0.min.js}"></script>
+
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>
+    
+    <script type="text/javascript" th:src="@{/js/bootstrapValidator.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrapValidator.min.css}"></link>
 </head>
 <body>
-
 <div class="container-fluid">
     <div th:include="top::html"></div>
          <div class="row" style="padding-top: 45px">
@@ -22,69 +24,28 @@
                             </li>
                         </ol>
                     </div>
-                 	<div class="with:100%">
-		    			<form class="form-horizontal"   th:action="@{/consumer/readUser/add}"  method="post">
+                 	<div class="col-md-10">
+		    			<form class="form-horizontal" id="form1"  th:action="@{/consumer/readUser/add}"  method="post">
 					        <div class="form-group">
-					            <label for="username" class="col-sm-2 control-label">UserName</label>
-					            <div class="col-sm-10">
-					                <input type="text" class="form-control" name="username"  id="UserName" placeholder="UserName"/>
-					            </div>
-					        </div>
+							    <label for="username" class="control-label">UserName</label>
+							    <input class="form-control" type="text" name="username" id="username" placeholder="UserName"/>
+							  </div> 
+							  <div class="form-group">
+							    <label for="userpwd" class="control-label">Password</label>
+							    <input class="form-control" type="password" name="userpwd" placeholder="PassWord"/>
+							  </div> 
+							  <div class="form-group">
+							    <label for="useremail" class="control-label">UserEmail</label>
+							    <input class="form-control" type="text" name="useremail" placeholder="UserEmail"/>
+							  </div> 
+							  <div class="form-group">
+							    <label for="usersex" class="control-label">UserSex</label>
+							    <input class="form-control" type="text" name="usersex" placeholder="UserSex"/>
+							  </div> 
 					        <div class="form-group">
-					            <label for="userpwd" class="col-sm-2 control-label" >Password</label>
-					            <div class="col-sm-10">
-					                <input type="password" class="form-control" name="userpwd" id="password" placeholder="Password"/>
-					            </div>
-					        </div>
-					       <div class="from-group">
-					            <label for="useremail" class="col-sm-2 control-label">UserEmail</label>
-					            <div class="col-sm-10">
-					                <input type="text" class="form-control" name="useremail"  id="UserEmail" placeholder="UserEmail"/>
-					            </div>
-					        </div>
-					        <div class="from-group">
-					            <label for="usersex" class="col-sm-2 control-label">UserSex</label>
-					            <div class="col-sm-10">
-					                <input type="text" class="form-control" name="usersex"  id="UserSex" placeholder="UserSex"/>
-					            </div>
-					        </div>
-					        <div class="from-group">
-					            <label for="readcount" class="col-sm-2 control-label">ReadCount</label>
-					            <div class="col-sm-10">
-					                <input type="text" class="form-control" name="readcount"  id="ReadCount" placeholder="ReadCount"/>
-					            </div>
-					        </div>
-					        <div class="from-group">
-					            <label for="readpay" class="col-sm-2 control-label">ReadPay</label>
-					            <div class="col-sm-10">
-					                <input type="text" class="form-control" name="readpay"  id="ReadPay" placeholder="ReadPay"/>
-					            </div>
-					        </div>
-					        <div class="from-group">
-					            <label for="vipset" class="col-sm-2 control-label">VipSet</label>
-					            <div class="col-sm-10">
-					                <input type="text" class="form-control" name="vipset"  id="VipSet" placeholder="VipSet"/>
-					            </div>
-					        </div>
-					        <div class="from-group">
-					            <label for="starttime" class="col-sm-2 control-label">StartTime</label>
-					            <div class="col-sm-10">
-					                <input type="text" class="form-control" name="starttime"  id="StartTime" placeholder="YYYY-MM-DD HH:mm:ss"/>
-					            </div>
-					        </div>
-					        <div class="from-group">
-					            <label for="endtime" class="col-sm-2 control-label">EndTime</label>
-					            <div class="col-sm-10">
-					                <input type="text" class="form-control" name="endtime"  id="EndTime" placeholder="YYYY-MM-DD HH:mm:ss"/>
-					            </div>
-					        </div>
-					        <div class="form-group">
-					            <div class="col-sm-offset-2 col-sm-10">
-					                <input type="submit" value="Submit" class="btn btn-info" />
-					                &nbsp; &nbsp; &nbsp;
-					                <input type="reset" value="Reset" class="btn btn-info" />
-					            </div>
-					
+				                <input type="submit" value="Submit" class="btn btn-info" />
+				                &nbsp; &nbsp; &nbsp;
+				                <input type="reset" value="Reset" class="btn btn-info" />
 					        </div>
 					    </form>
 					</div>
@@ -93,4 +54,68 @@
     <div th:include="footer::html"></div>
 </div>
 </body>
+<script type="text/javascript">
+$(function () {
+    $('#form1').bootstrapValidator({
+　　　　message: 'This value is not valid',
+        　feedbackIcons: {
+            　　　　　　　　valid: 'glyphicon glyphicon-ok',
+            　　　　　　　　invalid: 'glyphicon glyphicon-remove',
+            　　　　　　　　validating: 'glyphicon glyphicon-refresh'
+        　　　　　　　　   },
+        fields: {
+            username: {
+                message: '用户名验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '用户名不能为空'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 18,
+                        message: '用户名长度必须在6到18位之间'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: '用户名只能包含大写、小写、数字和下划线'
+                    }
+                }
+            },
+            userpwd: {
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 18,
+                        message: '密码长度必须在6到18位之间'
+                    }
+                }
+            },
+            useremail: {
+                validators: {
+                    notEmpty: {
+                        message: '邮箱地址不能为空'
+                    },
+                    emailAddress: {
+                        message: '邮箱地址格式有误'
+                    }
+                }
+            },
+            usersex: {
+                validators: {
+                    notEmpty: {
+                        message: '性别不能为空'
+                    },
+                    regexp: {
+                        regexp: /^(男|女)$/,
+                        message: '性别只能男或女'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
 </html>

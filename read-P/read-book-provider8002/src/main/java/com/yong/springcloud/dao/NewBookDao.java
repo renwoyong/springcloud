@@ -13,5 +13,7 @@ public interface NewBookDao {
 	public boolean upPlan(Long bookid);
 	
 	public boolean unupPlan(Long bookid);
+	
+	public List<Book> findShowNewBooklist();
 
 }

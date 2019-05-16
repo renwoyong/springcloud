@@ -15,5 +15,21 @@
 	<update id="unupPlan" parameterType="Book">
 		update book set plan='0' where bookid=#{bookid};
 	</update>
+	
+	<select id="findShowNewBooklist" resultType="Book">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket,
+			plan
+	    from book where plan='1' limit 0,10;
+	</select>
 
 </mapper>

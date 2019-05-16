@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
     <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrapValidator.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrapValidator.min.css}"></link>
 </head>
 <body>
 
@@ -22,57 +24,41 @@
                             </li>
                         </ol>
                     </div>
-                 	<div class="with:100%">
-		    			<form class="form-horizontal"   th:action="@{/consumer/author/edit}" th:object="${author}"  method="post">
+                 	<div class="col-md-10">
+		    			<form class="form-horizontal" id="form1"  th:action="@{/consumer/author/edit}" th:object="${author}"  method="post">
 					        <input type="hidden" name="authorid" th:value="*{authorid}" />
 					        <div class="form-group">
-					            <label for="authorname" class="col-sm-2 control-label">AuthorName</label>
-					            <div class="col-sm-10">
-					                <input type="text" class="form-control" name="authorname"  id="AuthorName" th:value="*{authorname}" placeholder="AuthorName"/>
-					            </div>
+					            <label for="authorname" class="control-label">AuthorName</label>
+					            <input type="text" class="form-control" name="authorname" th:value="*{authorname}" placeholder="AuthorName"/>
 					        </div>
 					        <div class="form-group">
-					            <label for="authoremail" class="col-sm-2 control-label" >AuthorEmail</label>
-					            <div class="col-sm-10">
-					                <input type="text" class="form-control" name="authoremail" id="AuthorEmail" th:value="*{authoremail}" placeholder="AuthorEmail"/>
-					            </div>
-					        </div>
-					       <div class="from-group">
-					            <label for="authorsex" class="col-sm-2 control-label">AuthorSex</label>
-					            <div class="col-sm-10">
-					                <input type="text" class="form-control" name="authorsex"  id="AuthorSex" th:value="*{authorsex}" placeholder="AuthorSex"/>
-					            </div>
-					        </div>
-					        <div class="from-group">
-					            <label for="authorincome" class="col-sm-2 control-label">AuthorIncome</label>
-					            <div class="col-sm-10">
-					                <input type="text" class="form-control" name="authorincome"  id="AuthorIncome" th:value="*{authorincome}" placeholder="AuthorIncome"/>
-					            </div>
-					        </div>
-					        <div class="from-group">
-					            <label for="authorintroduction" class="col-sm-2 control-label">AuthorIntroduction</label>
-					            <div class="col-sm-10">
-					                <textarea  class="form-control" name="authorintroduction"  id="AuthorIntroduction" th:text="*{authorintroduction}" placeholder="AuthorIntroduction" style="height:200px;" ></textarea>
-					            </div>
-					        </div>
-					        <div class="from-group">
-					            <label for="authorworks" class="col-sm-2 control-label">AuthorWorks</label>
-					            <div class="col-sm-10">
-					                <textarea  class="form-control" name="authorworks"  id="AuthorWorks" th:text="*{authorworks}" placeholder="AuthorWorks" style="height:200px;" ></textarea>
-					            </div>
-					        </div>
-					        <div class="from-group">
-					            <label for="authordots" class="col-sm-2 control-label">AuthorDots</label>
-					            <div class="col-sm-10">
-					                <input type="text" class="form-control" name="authordots"  id="AuthorDots" th:value="*{authordots}" placeholder="AuthorDots"/>
-					            </div>
+					            <label for="authoremail" class="control-label" >AuthorEmail</label>
+					            <input type="text" class="form-control" name="authoremail" th:value="*{authoremail}" placeholder="AuthorEmail"/>
 					        </div>
 					        <div class="form-group">
-					            <div class="col-sm-offset-2 col-sm-10">
-					                <input type="submit" value="Submit" class="btn btn-info" />
-					                &nbsp; &nbsp; &nbsp;
-					                <a href="/consumer/author/toedit" th:href="@{/consumer/author/findAll}" class="btn btn-info">Back</a>
-					            </div>
+					            <label for="authorsex" class="control-label" >AuthorSex</label>
+					            <input type="text" class="form-control" name="authorsex"  th:value="*{authorsex}" placeholder="AuthorSex"/>
+					        </div>
+					        <div class="form-group">
+					        	<label for="authorincome" class="control-label">AuthorIncome</label>
+					        	<input type="text" class="form-control" name="authorincome" th:value="*{authorincome}" placeholder="AuthorIncome"/>
+					        </div>
+					        <div class="form-group">
+					        	<label for="authorintroduction" class="control-label">AuthorIntroduction</label>
+					        	<textarea  class="form-control" name="authorintroduction" th:text="*{authorintroduction}" placeholder="AuthorIntroduction" style="height:200px;" ></textarea>
+					        </div>
+					        <div class="form-group">
+					        	<label for="authorworks" class="control-label">AuthorWorks</label>
+					        	<textarea  class="form-control" name="authorworks" th:text="*{authorworks}" placeholder="AuthorWorks" style="height:200px;" ></textarea>
+					        </div>
+					        <div class="form-group">
+					        	<label for="authordots" class="control-label">AuthorDots</label>
+					        	<input type="text" class="form-control" name="authordots" th:value="*{authordots}" placeholder="AuthorDots"/>
+					        </div>
+					        <div class="form-group">
+				                <input type="submit" value="Submit" class="btn btn-info" />
+				                &nbsp; &nbsp; &nbsp;
+				                <a th:href="@{/consumer/author/findAll}" class="btn btn-info">Back</a>
 					        </div>
 					    </form>
 					</div>
@@ -81,4 +67,76 @@
     <div th:include="footer::html"></div>
 </div>
 </body>
+<script type="text/javascript">
+$(function () {
+    $('#form1').bootstrapValidator({
+　　　　message: 'This value is not valid',
+        　feedbackIcons: {
+            　　　　　　　　valid: 'glyphicon glyphicon-ok',
+            　　　　　　　　invalid: 'glyphicon glyphicon-remove',
+            　　　　　　　　validating: 'glyphicon glyphicon-refresh'
+        　　　　　　　　   },
+        fields: {
+        	authorname: {
+                message: '作者名验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '作者名不能为空'
+                    },
+                    stringLength: {
+                        min: 1,
+                        max: 18,
+                        message: '作者名长度必须在1到18位之间'
+                    }
+                }
+            },
+            authoremail: {
+                validators: {
+                    notEmpty: {
+                        message: '邮箱地址不能为空'
+                    },
+                    emailAddress: {
+                        message: '邮箱地址格式有误'
+                    }
+                }
+            },
+            authorsex: {
+                validators: {
+                    notEmpty: {
+                        message: '性别不能为空'
+                    },
+                    regexp: {
+                        regexp: /^(男|女)$/,
+                        message: '性别只能男或女'
+                    }
+                }
+            },
+            authorintroduction: {
+                validators: {
+                    notEmpty: {
+                        message: '作者介绍不能为空'
+                    },
+                    stringLength: {
+                        min: 1,
+                        max: 200,
+                        message: '作者介绍长度必须在1到200位之间'
+                    }
+                }
+            },
+            authorworks: {
+                validators: {
+                    notEmpty: {
+                        message: '作者作品不能为空'
+                    },
+                    stringLength: {
+                        min: 1,
+                        max: 200,
+                        message: '作者作品长度必须在1到200位之间'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
 </html>

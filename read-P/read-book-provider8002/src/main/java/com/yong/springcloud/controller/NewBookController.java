@@ -35,4 +35,9 @@ public class NewBookController {
 		return newBookService.unupPlan(bookid);
 	}
 
+	@RequestMapping(value="/book/findShowNewBooklist",method=RequestMethod.GET)
+	public List<Book> findShowNewBooklist()
+	{
+		return newBookService.findShowNewBooklist();
+	}
 }

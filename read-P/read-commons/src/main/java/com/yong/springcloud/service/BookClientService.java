@@ -88,5 +88,19 @@ public interface BookClientService {
 	@RequestMapping(value="/book/findSubBookCount8",method=RequestMethod.GET)
 	public Integer findSubBookCount8();
 	
+	@RequestMapping(value="/book/findsomeBooks",method=RequestMethod.GET)
+	public List<Book> findsomeBooks(@RequestParam(value="thekey") String thekey,@RequestParam(value="pagenum") Integer pagenum);
+	
+	@RequestMapping(value="/book/findsomeBooksCount",method=RequestMethod.GET)
+	public Integer findsomeBooksCount(@RequestParam(value="thekey") String thekey);
+	
+	@RequestMapping(value="/book/findweekBookList",method=RequestMethod.GET)
+	public List<Book> findweekBookList();
+	
+	@RequestMapping(value="/book/findmonthBookList",method=RequestMethod.GET)
+	public List<Book> findmonthBookList();
+	
+	@RequestMapping(value="/book/findyearBookList",method=RequestMethod.GET)
+	public List<Book> findyearBookList();
 	
 }

@@ -88,8 +88,21 @@
 			authordots=#{authordots}
 		where authorid=#{authorid};
 	</update>
+	
 	<delete id="delAuthor" parameterType="Long">
 		delete from author where authorid=#{authorid}; 
 	</delete>
+	
+	<select id="finddots" resultType="Author" parameterType="String">
+		select 
+			authorid,
+			authordots
+		from author where authorname=#{bookauthor};
+	</select>
 
+	<update id="updots" parameterType="Author">
+		update author set 
+			authordots=#{authordots}
+		where authorid=#{authorid};
+	</update>
 </mapper>

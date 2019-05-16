@@ -15,7 +15,8 @@
 			state,
 			ctime,
 			weeklyticket,
-			monthlyticket
+			monthlyticket,
+			ticket
 	    from book where bookid=#{bookid};
 	</select>
 	
@@ -67,7 +68,8 @@
 			state=#{state},
 			ctime=#{ctime},
 			weeklyticket=#{weeklyticket},
-			monthlyticket=#{monthlyticket}
+			monthlyticket=#{monthlyticket},
+			ticket=#{ticket}
 		where bookid=#{bookid};
 	</update>
 	
@@ -253,5 +255,80 @@
 	</select>
 	<select id="findSubBookCount8" resultType="Integer">
 		SELECT count(*) from book where booktype like '%网%游%';
+	</select>
+	
+	<select id="findsomeBooks" resultType="Book">
+		select 
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket
+	    from book 
+	    where bookname=#{arg0} or bookauthor=#{arg0} or booktype=#{arg0}
+	    LIMIT #{arg1},10;
+	</select>
+	
+	<select id="findsomeBooksCount" resultType="Integer" parameterType="String">
+		select 
+			count(*)
+	    from book 
+	    where bookname=#{thekey} or bookauthor=#{thekey} or booktype=#{thekey};
+	</select>
+	
+	<select id="findweekBookList" resultType="Book">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket,
+			ticket
+	    from book 
+	    where bookid in(select bookid from book where week(ctime)=week(NOW())) ORDER BY ticket DESC LIMIT 0,10;
+	</select>
+	
+	<select id="findmonthBookList" resultType="Book">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket,
+			ticket
+	    from book 
+	    where bookid in(select bookid from book where month(ctime)=month(NOW())) ORDER BY ticket DESC LIMIT 0,10;
+	</select>
+	
+	<select id="findyearBookList" resultType="Book">
+		select
+			bookid,
+			bookname,
+			bookauthor,
+			bookintroduction,
+			booktype,
+			bookcount,
+			state,
+			ctime,
+			weeklyticket,
+			monthlyticket,
+			ticket
+	    from book 
+	    where bookid in(select bookid from book where year(ctime)=year(NOW())) ORDER BY ticket DESC LIMIT 0,10;
 	</select>
 </mapper>

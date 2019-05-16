@@ -38,6 +38,18 @@ public class AuthorServiceImpl implements AuthorService{
 	public boolean delAuthor(Long authorid) {
 		return authorDao.delAuthor(authorid);
 	}
+
+	@Override
+	public Author finddots(String bookauthor) {
+
+		return authorDao.finddots(bookauthor);
+	}
+
+	@Override
+	public boolean updots(Author author) {
+
+		return authorDao.updots(author);
+	}
 	
 	
 

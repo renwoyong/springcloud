@@ -29,6 +29,21 @@ public class CommentServiceImpl implements CommentService{
 	public boolean delComment(Long commentid) {
 		return commentDao.delComment(commentid);
 	}
+
+	@Override
+	public boolean addComment(Comment comment) {
+		return commentDao.addComment(comment);
+	}
+
+	@Override
+	public List<Comment> findshowComments(Long bookid) {
+		return commentDao.findshowComments(bookid);
+	}
+
+	@Override
+	public boolean upComment(Comment comment) {
+		return commentDao.upComment(comment);
+	}
 	
 	
 }

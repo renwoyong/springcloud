@@ -19,5 +19,9 @@ public interface AuthorDao {
 	  public boolean upAuthor(Author author);
 
 	  public boolean delAuthor(Long authorid);
+	  
+	  public Author finddots(String bookauthor);
+	  
+	  public boolean updots(Author author);
 
 }

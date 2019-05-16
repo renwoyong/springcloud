@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
     <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrapValidator.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrapValidator.min.css}"></link>
 </head>
 <body>
 <div class="container-fluid">
@@ -21,47 +23,34 @@
                             </li>
                         </ol>
                     </div>
-                 	<div class="with:100%">
-		    			<form class="form-horizontal"   th:action="@{/consumer/chapter/edit}" th:object="${chapter}"  method="post">
+                 	<div class="col-md-10">
+		    			<form class="form-horizontal"  id="form1" th:action="@{/consumer/chapter/edit}" th:object="${chapter}"  method="post">
 				        <input type="hidden" name="chapterid" th:value="*{chapterid}" />
 				        <div class="form-group">
-				            <label for="chaptername" class="col-sm-2 control-label">ChapterName</label>
-				            <div class="col-sm-10">
-				                <input type="text" class="form-control" name="chaptername"  id="ChapterName" th:value="*{chaptername}" placeholder="ChapterName"/>
-				            </div>
+				            <label for="chaptername" class="control-label">ChapterName</label>
+				            <input type="text" class="form-control" name="chaptername" th:value="*{chaptername}" placeholder="ChapterName"/>
 				        </div>
 				        <div class="form-group">
-				            <label for="chaptercontent" class="col-sm-2 control-label" >ChapterContent</label>
-				            <div class="col-sm-10">
-				               <!-- <input type="text" class="form-control" name="chaptercontent" id="ChapterContent" th:value="*{chaptercontent}" placeholder="ChapterContext"/> --> 
-				                <textarea   rows="" cols="" class="form-control" name="chaptercontent" id="ChapterContent" th:text="${chapter.chaptercontent}" style="height:800px;"></textarea>
-				            </div>
-				        </div>
-				       <div class="from-group">
-				            <label for="bookid" class="col-sm-2 control-label">BookId</label>
-				            <div class="col-sm-10">
-				                <input type="text" class="form-control" name="bookid"  id="BookId" th:value="*{bookid}" placeholder="BookId"/>
-				            </div>
-				        </div>
-				        <div class="from-group">
-				            <label for="chaptercount" class="col-sm-2 control-label">ChapterCount</label>
-				            <div class="col-sm-10">
-				                <input type="text" class="form-control" name="chaptercount"  id="ChapterCount" th:value="*{chaptercount}" placeholder="ChapterCount"/>
-				            </div>
-				        </div>
-				        <div class="from-group">
-				            <label for="free" class="col-sm-2 control-label">Free</label>
-				            <div class="col-sm-10">
-				                <input type="text" class="form-control" name="free"  id="Free" th:value="*{free}" placeholder="Free"/>
-				            </div>
+				            <label for="chaptercontent" class="control-label" >ChapterContent</label>
+				            <!-- <input type="text" class="form-control" name="chaptercontent" id="ChapterContent" th:value="*{chaptercontent}" placeholder="ChapterContext"/> --> 
+				            <textarea   rows="" cols="" class="form-control" name="chaptercontent" th:text="${chapter.chaptercontent}" style="height:800px;"></textarea>
 				        </div>
 				        <div class="form-group">
-				            <div class="col-sm-offset-2 col-sm-10">
-				                <input type="submit" value="Submit" class="btn btn-info" />
-				                &nbsp; &nbsp; &nbsp;
-				                <a th:href="@{/consumer/chapter/findChapterlist?bookid=}+${chapter.bookid}" class="btn btn-info">Back</a>
-				            </div>
-				
+				            <label for="bookid" class="control-label">BookId</label>
+				            <input type="text" class="form-control" name="bookid" th:value="*{bookid}" placeholder="BookId"/>
+				        </div>
+				        <div class="form-group">
+				            <label for="chaptercount" class="control-label">ChapterCount</label>
+				            <input type="text" class="form-control" name="chaptercount" th:value="*{chaptercount}" placeholder="ChapterCount"/>
+				        </div>
+				        <div class="form-group">
+				            <label for="free" class="control-label">Free</label>
+				            <input type="text" class="form-control" name="free" th:value="*{free}" placeholder="Free"/>
+				        </div>
+				        <div class="form-group">
+			                <input type="submit" value="Submit" class="btn btn-info" />
+			                &nbsp; &nbsp; &nbsp;
+			                <a th:href="@{/consumer/chapter/findChapterlist?bookid=}+${chapter.bookid}" class="btn btn-info">Back</a>
 				        </div>
 				    </form>
 				  </div>
@@ -70,4 +59,49 @@
     <div th:include="footer::html"></div>
 </div>
 </body>
+<script type="text/javascript">
+$(function () {
+    $('#form1').bootstrapValidator({
+　　　　message: 'This value is not valid',
+        　feedbackIcons: {
+            　　　　　　　　valid: 'glyphicon glyphicon-ok',
+            　　　　　　　　invalid: 'glyphicon glyphicon-remove',
+            　　　　　　　　validating: 'glyphicon glyphicon-refresh'
+        　　　　　　　　   },
+        fields: {
+        	chaptername: {
+                message: '章节名验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '章节名不能为空'
+                    },
+                    stringLength: {
+                        min: 1,
+                        max: 18,
+                        message: '章节名长度必须在1到18位之间'
+                    }
+                }
+            },
+            bookid: {
+                validators: {
+                    notEmpty: {
+                        message: '书籍ID不能为空'
+                    }
+                }
+            },
+            free: {
+                validators: {
+                    notEmpty: {
+                        message: '是否免费不能为空'
+                    },
+                    regexp: {
+                        regexp: /^(1|0)$/,
+                        message: '1或0'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
 </html>

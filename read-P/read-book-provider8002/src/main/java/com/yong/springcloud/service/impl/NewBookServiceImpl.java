@@ -32,6 +32,11 @@ public class NewBookServiceImpl implements NewBookService{
 		
 		return newBookDao.unupPlan(bookid);
 	}
+
+	@Override
+	public List<Book> findShowNewBooklist() {
+		return newBookDao.findShowNewBooklist();
+	}
 	
 	
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yong.springcloud.entities.Author;
@@ -48,4 +49,15 @@ public class AuthorController {
 		return authorService.delAuthor(authorid);
 	}
 
+	@RequestMapping(value="/author/finddots",method=RequestMethod.GET)
+	public Author finddots(@RequestParam("bookauthor") String bookauthor)
+	{
+		return authorService.finddots(bookauthor);
+	}
+	
+	@RequestMapping(value="/author/updots",method=RequestMethod.POST)
+	public boolean updots(@RequestBody Author author)
+	{
+		return authorService.updots(author);
+	}
 }

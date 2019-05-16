@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="UTF-8"/>
+    <title>用户注册</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.0.min.js}"></script>
+
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>
+    
+    <script type="text/javascript" th:src="@{/js/bootstrapValidator.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrapValidator.min.css}"></link>
+</head>
+<body>
+<!-- 注册表单 -->
+     <form style="margin-left:500px;margin-top:200px;" th:action="@{/consumer/readUser/addUser}" method="post">
+     	<h4>用户注册</h4>
+        <div class="form-group">
+            <label for="username" style="display:inline;">账户：</label>
+            <input type="text" class="form-control" name="username" style="display:inline;width:200px;"  />
+        </div>
+       <div class="form-group">
+            <label for="password" style="display:inline;">密码：</label>
+            <input type="password" class="form-control" name="password" style="display:inline;width:200px;"  />
+       </div>
+       <div class="form-group">
+            <label for="useremail" style="display:inline;">邮箱：</label>
+            <input type="text" class="form-control" name="useremail" style="display:inline;width:200px;"  />
+       </div>
+       <div class="form-group">
+            <label for="usersex" style="display:inline;">性别：</label>
+            <input type="text" class="form-control" name="usersex" style="display:inline;width:200px;"  />
+       </div>
+       <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)} "></p>
+       <input type="submit"  value="确认注册" class="btn btn-primary"/>
+       <a class="btn btn-primary" th:href="@{/show/login}">去登陆</a>
+     </form>
+     
+</body>
+<script type="text/javascript">
+$(function () {
+    $('form').bootstrapValidator({
+　　　　message: 'This value is not valid',
+        　feedbackIcons: {
+            　　　　　　　　valid: 'glyphicon glyphicon-ok',
+            　　　　　　　　invalid: 'glyphicon glyphicon-remove',
+            　　　　　　　　validating: 'glyphicon glyphicon-refresh'
+        　　　　　　　　   },
+        fields: {
+            username: {
+                message: '用户名验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '用户名不能为空'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 18,
+                        message: '用户名长度必须在6到18位之间'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: '用户名只能包含大写、小写、数字和下划线'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 18,
+                        message: '密码长度必须在6到18位之间'
+                    }
+                }
+            },
+            useremail: {
+                validators: {
+                    notEmpty: {
+                        message: '邮箱地址不能为空'
+                    },
+                    emailAddress: {
+                        message: '邮箱地址格式有误'
+                    }
+                }
+            },
+            usersex: {
+                validators: {
+                    notEmpty: {
+                        message: '性别不能为空'
+                    },
+                    regexp: {
+                        regexp: /^(男|女)$/,
+                        message: '性别只能男或女'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+</html>

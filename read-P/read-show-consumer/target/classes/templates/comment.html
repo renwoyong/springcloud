@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>九零看书网</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.0.min.js}"></script>
+
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>
+    
+    <script type="text/javascript" th:src="@{/js/bootstrapValidator.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrapValidator.min.css}"></link>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row" th:include="toper::html"></div>
+	<div class="container" style="width:990px">
+		<div class="comment-box">
+			<div class="comment-list-container">
+				<table>
+				 <tr th:each="comment: ${comments}">  
+                    <td>
+                       <span th:text="${comment.username}+'：'+${comment.context}+' '+${comment.createdtime}"></span>  
+                    </td>
+                 </tr>  
+				</table>
+			</div>
+			<div class="comment-edit-box">
+			<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)} "></p>
+				<form id="form1" th:action="@{/consumer/comment/editcomment}" method="post">
+					<input type="hidden" name="bookid" th:value="${bookid}" />
+					<input type="hidden" name="bookname" th:value="${bookname}" />
+					<textarea class="form-control" name="comment_content" style="height:100px;width:800px;" placeholder="想说点什么"></textarea>
+					
+					<div>
+		                <input type="submit" value="发表评论" class="btn btn-info" />
+		                &nbsp; &nbsp; &nbsp;
+		                <input type="reset" value="重置" class="btn btn-info" />
+		            </div>
+		            
+	            </form>
+			</div>
+		</div>
+	</div>
+    <div class="row" th:include="footer::html"></div>
+</div>
+</body>
+</html>

@@ -20,4 +20,7 @@ public interface NewBookClientService {
 	
 	@RequestMapping(value="/book/unupPlan/{bookid}",method=RequestMethod.POST)
 	public boolean unupPlan(@PathVariable("bookid") long bookid);
+	
+	@RequestMapping(value="/book/findShowNewBooklist",method=RequestMethod.GET)
+	public List<Book> findShowNewBooklist();
 }

@@ -156,4 +156,34 @@ public class BookController {
 	{
 		return bookService.findSubBookCount8();
 	}
+	
+	@RequestMapping(value="/book/findsomeBooks",method=RequestMethod.GET)
+	public List<Book> findsomeBooks(@RequestParam(value="thekey") String thekey,@RequestParam(value="pagenum") Integer pagenum)
+	{
+		return bookService.findsomeBooks(thekey,pagenum);
+	}
+	
+	@RequestMapping(value="/book/findsomeBooksCount",method=RequestMethod.GET)
+	public Integer findsomeBooksCount(@RequestParam(value="thekey") String thekey)
+	{
+		return bookService.findsomeBooksCount(thekey);
+	}
+	
+	@RequestMapping(value="/book/findweekBookList",method=RequestMethod.GET)
+	public List<Book> findweekBookList()
+	{
+		return bookService.findweekBookList();
+	}
+	
+	@RequestMapping(value="/book/findmonthBookList",method=RequestMethod.GET)
+	public List<Book> findmonthBookList()
+	{
+		return bookService.findmonthBookList();
+	}
+	
+	@RequestMapping(value="/book/findyearBookList",method=RequestMethod.GET)
+	public List<Book> findyearBookList()
+	{
+		return bookService.findyearBookList();
+	}
 }

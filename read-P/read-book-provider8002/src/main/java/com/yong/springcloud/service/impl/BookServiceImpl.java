@@ -148,6 +148,36 @@ public class BookServiceImpl implements BookService{
 		
 		return bookDao.findSubBookCount8();
 	}
+
+	@Override
+	public List<Book> findsomeBooks(String thekey,Integer pagenum) {
+	
+		return bookDao.findsomeBooks(thekey,pagenum);
+	}
+
+	@Override
+	public Integer findsomeBooksCount(String thekey) {
+
+		return bookDao.findsomeBooksCount(thekey);
+	}
+
+	@Override
+	public List<Book> findweekBookList() {
+		
+		return bookDao.findweekBookList();
+	}
+
+	@Override
+	public List<Book> findmonthBookList() {
+		
+		return bookDao.findmonthBookList();
+	}
+
+	@Override
+	public List<Book> findyearBookList() {
+		
+		return bookDao.findyearBookList();
+	}
 	
 	
 	

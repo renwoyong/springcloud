@@ -17,4 +17,6 @@ public interface ReadUserDao {
 	  public boolean upUser(ReadUser user);
 
 	  public boolean delUser(Long userid);
+	  
+	  public ReadUser findUser(String username);
 }
