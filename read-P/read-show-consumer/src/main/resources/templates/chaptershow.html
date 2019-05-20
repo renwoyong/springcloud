@@ -19,7 +19,7 @@
               <tr> <td th:text="${content}"></td> </tr>  
           </table> -->
           <h2 align="center" th:text="${bookname}"></h2>
-          <h3 align="left" th:text="第+${mark}+章：+${chapter.chaptername}"></h3>
+          <h3 align="left" th:text="第+${mark}+章：+${chapter.chaptername}+${#dates.format(chapter.ctime,'yyyy-MM-dd HH:mm:ss')}"></h3>
           <pre align="left" style="white-space:pre-wrap;word-wrap:break-word;font-size:16px;font-family:微软雅黑">
           	<div th:text="${chapter.chaptercontent}"></div>
           </pre>

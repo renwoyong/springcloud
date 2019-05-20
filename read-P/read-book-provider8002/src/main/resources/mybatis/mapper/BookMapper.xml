@@ -53,7 +53,7 @@
 			#{booktype},
 			#{bookcount},
 			#{state},
-			#{ctime},
+			NOW(),
 			#{weeklyticket},
 			#{monthlyticket});
 	</insert>

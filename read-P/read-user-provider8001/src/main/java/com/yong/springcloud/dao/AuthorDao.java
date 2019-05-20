@@ -23,5 +23,7 @@ public interface AuthorDao {
 	  public Author finddots(String bookauthor);
 	  
 	  public boolean updots(Author author);
+	  
+	  public Author findAuthorAsName(String authorname);
 
 }

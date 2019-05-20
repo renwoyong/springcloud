@@ -20,7 +20,9 @@
 	<h4 th:text="${book.booktype}"></h4>
 	<a type="button" class="btn btn-default" th:href="@{/consumer/chapter/findChapter(chapterid=${chapter1.chapterid})}">开始阅读</a>
 	<a type="button" class="btn btn-default" th:href="@{/show/dots(bookid=${book.bookid})}">点赞</a>
-	<a type="button" class="btn btn-default" th:href="@{/show/download(bookid=${book.bookid})}">VIP下载</a>
+	<a type="button" class="btn btn-default" th:if="${vip!=null}" th:href="@{/show/download(bookid=${book.bookid})}">VIP下载</a>
+	<a type="button" class="btn btn-default" th:if="${session.ticket==null}" th:href="@{/show/weekticketpay(bookid=${book.bookid},bookname=${book.bookname})}">周票</a>
+	<a type="button" class="btn btn-default" th:if="${session.ticket==null}" th:href="@{/show/monthticketpay(bookid=${book.bookid},bookname=${book.bookname})}">月票</a>
 	</div>
 	<div class="container" style="width:990px">
 	<ul id="myTab" class="nav nav-tabs">
@@ -58,7 +60,7 @@ $(function () {
 	if(url.indexOf("error")>0){
 		alert("未登陆或不是VIP");
 	}
-  $('#myTab a:first').tab('show');
+  $('#myTab a:last').tab('show');
   $('#myTab a').click(function (e) {
 	 // e.preventDefault();
 	  $(this).tab('show');

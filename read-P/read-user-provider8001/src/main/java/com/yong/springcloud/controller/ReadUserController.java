@@ -53,4 +53,16 @@ public class ReadUserController {
 	  {
 		  return service.findUser(username);
 	  }
+	  
+	  @RequestMapping(value="/readUser/setvip/{userid}",method=RequestMethod.POST)
+	  public boolean setvip(@PathVariable("userid") Long userid)
+	  {
+		  return service.setvip(userid);
+	  }
+	  
+	  @RequestMapping(value="/readUser/cancalvip/{userid}",method=RequestMethod.POST)
+	  public boolean cancalvip(@PathVariable("userid") Long userid)
+	  {
+		  return service.cancalvip(userid);
+	  }
 }

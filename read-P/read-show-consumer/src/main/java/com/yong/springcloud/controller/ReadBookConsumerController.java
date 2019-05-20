@@ -10,6 +10,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +21,13 @@ import com.yong.springcloud.entities.Author;
 import com.yong.springcloud.entities.Book;
 import com.yong.springcloud.entities.Chapter;
 import com.yong.springcloud.entities.ReadUser;
+import com.yong.springcloud.entities.Ticket;
 import com.yong.springcloud.service.AuthorClientService;
 import com.yong.springcloud.service.BookClientService;
 import com.yong.springcloud.service.ChapterClientService;
 import com.yong.springcloud.service.NewBookClientService;
 import com.yong.springcloud.service.ReadUserClientService;
+import com.yong.springcloud.service.TicketClientService;
 
 
 @Controller
@@ -38,6 +43,8 @@ public class ReadBookConsumerController {
 	private ReadUserClientService readUserClientService;
 	@Autowired
 	private AuthorClientService authorClientService;
+	@Autowired
+	private TicketClientService ticketClientService;
 	
 	@RequestMapping(value="/consumer/book/findSubBook")
 	//public String List(Model model,@RequestParam(required = false,defaultValue = "1")int currentPage)
@@ -162,12 +169,67 @@ public class ReadBookConsumerController {
 	}
 	
 	@RequestMapping(value="/consumer/findbookshow")
-	public String findbookshow(Model model, long bookid)
+	public String findbookshow(Model model, long bookid,HttpServletRequest request)
 	{
 		
 		Book book = bookClientService.findBook(bookid);
 		List<Chapter> chapters = chapterClientService.findChapterlist(bookid);
 		Chapter chapter1=chapters.get(0);
+		
+		ReadUser readUser = (ReadUser) request.getSession().getAttribute("findreadUser");
+		if(readUser!=null) {
+			request.getSession().removeAttribute("ticket");
+			Ticket ticket = ticketClientService.findTicket(bookid, readUser.getUserid());
+			if(ticket!=null)
+			{
+				Date currentTime = new Date();
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				if(ticket.getWeekticket().equals("1"))
+				{
+					Date datestart = null;
+					Date dateend=null;
+					try {
+						datestart=format.parse(ticket.getWeekstart());
+						dateend=format.parse(ticket.getWeekend());
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if(currentTime.getTime()>=datestart.getTime()&&currentTime.getTime()<=dateend.getTime())
+					{
+						request.getSession().setAttribute("ticket",ticket);
+					}
+					else {
+						ticketClientService.delticket(ticket.getTicketid());
+					}
+				}
+				
+				if(ticket.getMonthticket().equals("1"))
+				{
+					Date datestart = null;
+					Date dateend=null;
+					try {
+						datestart=format.parse(ticket.getMonthstart());
+						dateend=format.parse(ticket.getMonthend());
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if(currentTime.getTime()>=datestart.getTime()&&currentTime.getTime()<=dateend.getTime())
+					{
+						request.getSession().setAttribute("ticket",ticket);
+					}
+					else {
+						ticketClientService.delticket(ticket.getTicketid());
+					}
+				}
+			}
+			if(readUser.getVipset().equals("1"))
+			{
+				model.addAttribute("vip", readUser.getVipset());
+			}
+		}
+		
 		model.addAttribute("chapter1", chapter1);
 		model.addAttribute("chapters", chapters);
 		model.addAttribute("book", book);
@@ -176,6 +238,152 @@ public class ReadBookConsumerController {
 	
 	@RequestMapping(value="/consumer/chapter/findChapter")
 	public String findchaptershow(Model model,long chapterid,HttpServletRequest request)
+	{
+		Chapter chapter = chapterClientService.findChapter(chapterid);
+		if(chapter.getFree().equals("0"))
+		{
+			Chapter chapterpre=null;
+			Chapter chapternext=null;
+			int mark=0;
+			
+			List<Chapter> chapters=chapterClientService.findChapterlist(chapter.getBookid());
+			Book book = bookClientService.findBook(chapter.getBookid());
+			/*
+			 * Map<Integer,Long> chapteridmap = new HashMap<Integer,Long>(); for(int i
+			 * =0;i<chapters.size();i++) { chapteridmap.put(i,
+			 * chapters.get(i).getChapterid()); }
+			 */
+			for(int i=0;i<chapters.size();i++)
+			{
+				if(chapters.get(i).equals(chapter))
+				{
+					mark=i+1;
+					if(i==0)
+					{
+						chapterpre=chapters.get(i);
+						chapternext=chapters.get(i+1);
+						break;
+					}
+					else if(i==(chapters.size()-1))
+					{
+						chapterpre=chapters.get(i-1);
+						chapternext=chapters.get(i);
+						break;
+					}
+					else 
+					{
+						chapterpre=chapters.get(i-1);
+						chapternext=chapters.get(i+1);
+						break;
+					}
+				}
+			}
+			System.out.println("preid:"+chapterpre.getChapterid());
+			System.out.println("nowid:"+chapter.getChapterid());
+			System.out.println("nextid:"+chapternext.getChapterid());
+			model.addAttribute("bookname", book.getBookname());
+			model.addAttribute("mark", mark);
+			model.addAttribute("chapterpre", chapterpre);
+			model.addAttribute("chapternext", chapternext);
+			model.addAttribute("chapter", chapter);
+			if(request.getSession().getAttribute("findreadUser")!=null)
+			{
+				book.setTicket(book.getTicket()+1);
+				bookClientService.upBook(book);
+				
+				ReadUser findshowUser = (ReadUser) request.getSession().getAttribute("findreadUser");
+				System.out.println("name:"+findshowUser.getUsername());
+				System.out.println("count:"+findshowUser.getReadcount());
+				findshowUser.setReadcount(findshowUser.getReadcount()+1);
+				readUserClientService.upuser(findshowUser);
+			}
+			
+			return"chaptershow";
+		}
+		else {
+			if(request.getSession().getAttribute("findreadUser")!=null) {
+				
+				ReadUser findshowUser = (ReadUser) request.getSession().getAttribute("findreadUser");
+				
+				Ticket ticket=ticketClientService.findTicket(chapter.getBookid(),findshowUser.getUserid());
+				
+				if(ticket!=null)
+				{
+					Chapter chapterpre=null;
+					Chapter chapternext=null;
+					int mark=0;
+					
+					List<Chapter> chapters=chapterClientService.findChapterlist(chapter.getBookid());
+					Book book = bookClientService.findBook(chapter.getBookid());
+					
+					for(int i=0;i<chapters.size();i++)
+					{
+						if(chapters.get(i).equals(chapter))
+						{
+							mark=i+1;
+							if(i==0)
+							{
+								chapterpre=chapters.get(i);
+								chapternext=chapters.get(i+1);
+								break;
+							}
+							else if(i==(chapters.size()-1))
+							{
+								chapterpre=chapters.get(i-1);
+								chapternext=chapters.get(i);
+								break;
+							}
+							else 
+							{
+								chapterpre=chapters.get(i-1);
+								chapternext=chapters.get(i+1);
+								break;
+							}
+						}
+					}
+					
+					model.addAttribute("bookname", book.getBookname());
+					model.addAttribute("mark", mark);
+					model.addAttribute("chapterpre", chapterpre);
+					model.addAttribute("chapternext", chapternext);
+					model.addAttribute("chapter", chapter);
+					
+					book.setTicket(book.getTicket()+1);
+					bookClientService.upBook(book);
+					
+					findshowUser.setReadcount(findshowUser.getReadcount()+1);
+					readUserClientService.upuser(findshowUser);
+					
+					return"chaptershow";
+				}
+				else {
+					if(findshowUser.getVipset().equals("1"))
+					{
+						//vip
+						String vipyes ="vip";
+						model.addAttribute("vipyes", vipyes);
+						model.addAttribute("chapterid", chapterid);
+						model.addAttribute("bookid", chapter.getBookid());
+						return "paysheet";
+					}
+					else {
+						//novip
+						String vipno = "novip";
+						model.addAttribute("vipno", vipno);
+						model.addAttribute("chapterid", chapterid);
+						model.addAttribute("bookid", chapter.getBookid());
+						return "paysheet";
+					}
+				}
+			}
+			else {
+				return "login";
+			}
+		}
+	}
+	
+	@RequestMapping(value="/consumer/chapter/findvipChapter")
+	public String findvipChapter(Model model,Long chapterid,HttpServletRequest request)
 	{
 		Chapter chapterpre=null;
 		Chapter chapternext=null;
@@ -227,10 +435,78 @@ public class ReadBookConsumerController {
 			bookClientService.upBook(book);
 			
 			ReadUser findshowUser = (ReadUser) request.getSession().getAttribute("findreadUser");
-			System.out.println("name:"+findshowUser.getUsername());
-			System.out.println("count:"+findshowUser.getReadcount());
-			findshowUser.setReadcount(findshowUser.getReadcount()+1);
-			readUserClientService.upuser(findshowUser);
+			ReadUser readUser = readUserClientService.get(findshowUser.getUserid());
+			System.out.println("name:"+readUser.getUsername());
+			System.out.println("count:"+readUser.getReadcount());
+			readUser.setReadcount(readUser.getReadcount()+1);
+			readUserClientService.upuser(readUser);
+			
+			readpay(readUser.getUserid(), 4);
+		}
+		
+		return"chaptershow";
+	}
+	
+	@RequestMapping(value="/consumer/chapter/findnovipChapter")
+	public String findnovipChapter(Model model,Long chapterid,HttpServletRequest request)
+	{
+		Chapter chapterpre=null;
+		Chapter chapternext=null;
+		int mark=0;
+		Chapter chapter = chapterClientService.findChapter(chapterid);
+		List<Chapter> chapters=chapterClientService.findChapterlist(chapter.getBookid());
+		Book book = bookClientService.findBook(chapter.getBookid());
+		/*
+		 * Map<Integer,Long> chapteridmap = new HashMap<Integer,Long>(); for(int i
+		 * =0;i<chapters.size();i++) { chapteridmap.put(i,
+		 * chapters.get(i).getChapterid()); }
+		 */
+		for(int i=0;i<chapters.size();i++)
+		{
+			if(chapters.get(i).equals(chapter))
+			{
+				mark=i+1;
+				if(i==0)
+				{
+					chapterpre=chapters.get(i);
+					chapternext=chapters.get(i+1);
+					break;
+				}
+				else if(i==(chapters.size()-1))
+				{
+					chapterpre=chapters.get(i-1);
+					chapternext=chapters.get(i);
+					break;
+				}
+				else 
+				{
+					chapterpre=chapters.get(i-1);
+					chapternext=chapters.get(i+1);
+					break;
+				}
+			}
+		}
+		System.out.println("preid:"+chapterpre.getChapterid());
+		System.out.println("nowid:"+chapter.getChapterid());
+		System.out.println("nextid:"+chapternext.getChapterid());
+		model.addAttribute("bookname", book.getBookname());
+		model.addAttribute("mark", mark);
+		model.addAttribute("chapterpre", chapterpre);
+		model.addAttribute("chapternext", chapternext);
+		model.addAttribute("chapter", chapter);
+		if(request.getSession().getAttribute("findreadUser")!=null)
+		{
+			book.setTicket(book.getTicket()+1);
+			bookClientService.upBook(book);
+			
+			ReadUser findshowUser = (ReadUser) request.getSession().getAttribute("findreadUser");
+			ReadUser readUser = readUserClientService.get(findshowUser.getUserid());
+			System.out.println("name:"+readUser.getUsername());
+			System.out.println("count:"+readUser.getReadcount());
+			readUser.setReadcount(readUser.getReadcount()+1);
+			readUserClientService.upuser(readUser);
+			
+			readpay(readUser.getUserid(), 5);
 		}
 		
 		return"chaptershow";
@@ -272,6 +548,26 @@ public class ReadBookConsumerController {
 			if(password.equals(findreadUser.getUserpwd()))
 			{
 				request.getSession().setAttribute("findreadUser", findreadUser);
+				if(findreadUser.getVipset().equals("1"))
+				{
+					Date currentTime = new Date();
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					
+					Date datestart = null;
+					Date dateend=null;
+					try {
+						datestart = format.parse(findreadUser.getStarttime());
+						dateend=format.parse(findreadUser.getEndtime());
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					
+					if((currentTime.getTime() >= datestart.getTime() && currentTime.getTime() <= dateend.getTime())==false)
+					{
+						readUserClientService.cancalvip(findreadUser.getUserid());
+					}
+				}
+				
 				return "redirect:/consumer/book/findSubBook";
 			}
 			else {
@@ -404,6 +700,111 @@ public class ReadBookConsumerController {
 		}
 		else {
 			return"redirect:/consumer/findbookshow?bookid="+bookid+"&error=1";
+		}
+	}
+	
+	@RequestMapping(value="/show/vippay")
+	public String vippay(Model model,Long userid)
+	{
+		String vipflag = "vip";
+		model.addAttribute("userid", userid);
+		model.addAttribute("vipflag", vipflag);
+		return "paysheet";
+	}
+	
+	@RequestMapping(value="/show/setvip")
+	public String setvip(Long userid)
+	{
+		readpay(userid, 1);
+		readUserClientService.setvip(userid);
+		return "redirect:/show/readuserinfo";
+	}
+	
+	@RequestMapping(value="/show/weekticket")
+	public String weekticket(Long bookid,String bookname,HttpServletRequest request)
+	{
+		
+		ReadUser readUser = (ReadUser) request.getSession().getAttribute("findreadUser");
+		if(readUser!=null){
+			
+			readpay(readUser.getUserid(), 2);
+			
+			Ticket ticket = new Ticket();
+			ticket.setBookid(bookid);
+			ticket.setBookname(bookname);
+			ticket.setUserid(readUser.getUserid());
+			ticket.setUsername(readUser.getUsername());
+			ticketClientService.addweekticket(ticket);
+		}
+		return"redirect:/consumer/findbookshow?bookid="+bookid;
+	}
+	
+	@RequestMapping(value="/show/monthticket")
+	public String monthticket(Long bookid,String bookname,HttpServletRequest request)
+	{
+		ReadUser readUser = (ReadUser) request.getSession().getAttribute("findreadUser");
+		if(readUser!=null){
+			
+			readpay(readUser.getUserid(), 3);
+			
+			Ticket ticket = new Ticket();
+			ticket.setBookid(bookid);
+			ticket.setBookname(bookname);
+			ticket.setUserid(readUser.getUserid());
+			ticket.setUsername(readUser.getUsername());
+			ticketClientService.addmonthticket(ticket);
+		}
+		return"redirect:/consumer/findbookshow?bookid="+bookid;
+	}
+	
+	@RequestMapping(value="/show/weekticketpay")
+	public String weekticketpay(Model model,Long bookid,String bookname)
+	{
+		String weekflag="week";
+		model.addAttribute("bookid", bookid);
+		model.addAttribute("bookname", bookname);
+		model.addAttribute("weekflag", weekflag);
+		return "paysheet";
+	}
+	
+	@RequestMapping(value="/show/monthticketpay")
+	public String monthticketpay(Model model,Long bookid,String bookname)
+	{
+		String monthflag="month";
+		model.addAttribute("bookid", bookid);
+		model.addAttribute("bookname", bookname);
+		model.addAttribute("monthflag", monthflag);
+		return"paysheet";
+	}
+	
+	public void readpay(Long userid,int type)
+	{
+		ReadUser readUser = new ReadUser();
+		readUser = readUserClientService.get(userid);
+		if(readUser!=null)
+		{
+			switch (type) {
+			case 1://vip
+				readUser.setReadpay(readUser.getReadpay()+20);
+				readUserClientService.upuser(readUser);
+				break;
+			case 2://weekticket
+				readUser.setReadpay(readUser.getReadpay()+5);
+				readUserClientService.upuser(readUser);
+				break;
+			case 3://monthticket
+				readUser.setReadpay(readUser.getReadpay()+10);
+				readUserClientService.upuser(readUser);
+				break;
+			case 4://vipchapter
+				readUser.setReadpay(readUser.getReadpay()+1);
+				readUserClientService.upuser(readUser);
+				break;
+			case 5://nomarlchapter
+				readUser.setReadpay(readUser.getReadpay()+2);
+				readUserClientService.upuser(readUser);
+				break;
+			}
 		}
 	}
 }

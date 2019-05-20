@@ -24,14 +24,14 @@ public class ReadUserConsumerController {
 	  private ReadUserClientService service = null;
 	 
 	 
-	  //用户列表
+	  
 	  @RequestMapping(value = "/consumer/readUser/list")
 	 public String List(Model model) {
 		 List<ReadUser> users=service.list();
 		 model.addAttribute("users", users);
 		 return "readuser/list";
 	 }
-	  //增加用户
+	  
 	  @RequestMapping(value = "/consumer/readUser/toadd")
 	 public String toadd() {
 		 return "readuser/userAdd";
@@ -44,7 +44,7 @@ public class ReadUserConsumerController {
 		  return "redirect:/consumer/readUser/list";
 	  }
 
-	  //修改用户
+	  
 	  @RequestMapping(value="/consumer/readUser/toedit")
 	  public String toEdit(Model model,Long userid) {
 		  ReadUser user=service.get(userid);
@@ -59,16 +59,29 @@ public class ReadUserConsumerController {
 	  }
 	  
 	  
-	  //删除用户
+	  
 	  @RequestMapping(value="/consumer/readUser/delUser")
 	  public String delete(Long userid) {
 		  service.delUser(userid);
 		  return "redirect:/consumer/readUser/list";
 	  }
 	  
+	  @RequestMapping(value="/consumer/readUser/setvip")
+	  public String setvip(Long userid)
+	  {
+		  service.setvip(userid);
+		  return "redirect:/consumer/readUser/toedit?userid="+userid+"&success=1";
+	  }
+	  
+	  @RequestMapping(value="/consumer/readUser/cancalvip")
+	  public String cancalvip(Long userid)
+	  {
+		  service.cancalvip(userid);
+		  return "redirect:/consumer/readUser/toedit?userid="+userid+"&fail=1";
+	  }
 	  
 	  /**
-	     * form表单提交 Date类型数据绑定
+	     * form锟斤拷锟结交 Date锟斤拷锟斤拷锟斤拷锟捷帮拷
 	     * @param binder
 	     */
 	  @InitBinder  

@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yong.springcloud.entities.Book;
 import com.yong.springcloud.entities.Chapter;
+import com.yong.springcloud.service.BookClientService;
 import com.yong.springcloud.service.ChapterClientService;
 
 @Controller
@@ -14,11 +16,21 @@ public class ChapterConsumerController {
 
 	@Autowired
 	private ChapterClientService chapterClientService;
+	@Autowired
+	private BookClientService bookClientService;
 	
 	@RequestMapping(value="/consumer/chapter/findChapterlist")
 	public String List(Model model,Long bookid)
 	{
+		int sum = 0;
 		List <Chapter> chapters=chapterClientService.findChapterlist(bookid);
+		Book book = bookClientService.findBook(bookid);
+		for(int i=0;i<chapters.size();i++)
+		{
+			sum=sum+chapters.get(i).getChaptercount();
+		}
+		book.setBookcount(sum);
+		bookClientService.upBook(book);
 		model.addAttribute("chapters", chapters);
 		return "chapter/chapterlist";
 	}
@@ -32,6 +44,7 @@ public class ChapterConsumerController {
 	@RequestMapping(value="/consumer/chapter/add")
 	public String add(Chapter chapter)
 	{
+		chapter.setChaptercount(chapter.getChaptercontent().length());
 		chapterClientService.addChapter(chapter);
 		String url="redirect:/consumer/chapter/findChapterlist?bookid="+chapter.getBookid();
 		return url;
@@ -48,6 +61,7 @@ public class ChapterConsumerController {
 	@RequestMapping(value="/consumer/chapter/edit")
 	public String edit(Chapter chapter)
 	{
+		chapter.setChaptercount(chapter.getChaptercontent().length());
 		chapterClientService.upChapter(chapter);
 		String url="redirect:/consumer/chapter/findChapterlist?bookid="+chapter.getBookid();
 		return url;

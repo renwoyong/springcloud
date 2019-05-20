@@ -60,4 +60,10 @@ public class AuthorController {
 	{
 		return authorService.updots(author);
 	}
+	
+	@RequestMapping(value="/author/findAuthorAsName/{authorname}",method=RequestMethod.GET)
+	public Author findAuthorAsName(@PathVariable("authorname") String authorname)
+	{
+		return authorService.findAuthorAsName(authorname);
+	}
 }

@@ -1,5 +1,7 @@
 package com.yong.springcloud.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +27,12 @@ public class AdminUserConsumerController {
 	}
 	
 	@RequestMapping(value="/consumer/adminuser/findUser")
-	public String findUser( AdminUser loginUser) throws Exception
+	public String findUser( AdminUser loginUser,HttpServletRequest request) throws Exception
 	{
 		if (loginUser.getAusername() == null) {
 			return "adminuser/login";
 		}
-		// 调用验证服务
+		
 		AdminUser dataUser = adminUserClientService.findUser(loginUser.getAusername());
 		if(dataUser!=null) {
 			if(dataUser.getAuserpwd().isEmpty())
@@ -41,7 +43,10 @@ public class AdminUserConsumerController {
 			{
 				return "adminuser/error";
 			}
-			return "redirect:/consumer/menu";
+			else {
+				request.getSession().setAttribute("dataUser", dataUser);
+				return "redirect:/consumer/menu";
+			}
 		}
 		else {
 			return "adminuser/error";

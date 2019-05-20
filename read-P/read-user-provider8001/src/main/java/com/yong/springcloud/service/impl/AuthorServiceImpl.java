@@ -50,7 +50,11 @@ public class AuthorServiceImpl implements AuthorService{
 
 		return authorDao.updots(author);
 	}
-	
-	
 
+	@Override
+	public Author findAuthorAsName(String authorname) {
+		
+		return authorDao.findAuthorAsName(authorname);
+	}
+	
 }

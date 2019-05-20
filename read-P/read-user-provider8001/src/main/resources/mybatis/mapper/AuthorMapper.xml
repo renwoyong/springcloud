@@ -105,4 +105,17 @@
 			authordots=#{authordots}
 		where authorid=#{authorid};
 	</update>
+	
+	<select id="findAuthorAsName" resultType="Author" parameterType="String">
+		select 
+			authorid,
+			authorname,
+			authoremail,
+			authorsex,
+			authorincome,
+			authorintroduction,
+			authorworks,
+			authordots
+		from author where authorname=#{authorname};
+	</select>
 </mapper>

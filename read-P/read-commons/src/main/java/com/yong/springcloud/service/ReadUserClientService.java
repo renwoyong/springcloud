@@ -29,5 +29,11 @@ public interface ReadUserClientService {
 	  @RequestMapping(value="/readUser/findUser",method=RequestMethod.GET)
 	  public ReadUser findUser(@RequestParam("username") String username);
 	  
+	  @RequestMapping(value="/readUser/setvip/{userid}",method=RequestMethod.POST)
+	  public boolean setvip(@PathVariable("userid") Long userid);
+	  
+	  @RequestMapping(value="/readUser/cancalvip/{userid}",method=RequestMethod.POST)
+	  public boolean cancalvip(@PathVariable("userid") Long userid);
+
 	}
 

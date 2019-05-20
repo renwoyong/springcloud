@@ -36,4 +36,6 @@ public interface AuthorClientService {
 	@RequestMapping(value="/author/updots",method=RequestMethod.POST)
 	public boolean updots(@RequestBody Author author);
 	
+	@RequestMapping(value="/author/findAuthorAsName/{authorname}",method=RequestMethod.GET)
+	public Author findAuthorAsName(@PathVariable("authorname") String authorname);
 }

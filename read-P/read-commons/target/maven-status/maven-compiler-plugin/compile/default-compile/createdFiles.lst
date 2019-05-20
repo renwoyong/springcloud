@@ -1,7 +1,9 @@
 com\yong\springcloud\entities\Chapter.class
 com\yong\springcloud\entities\Comment.class
 com\yong\springcloud\service\AdminUserClientService.class
+com\yong\springcloud\service\TicketClientService.class
 com\yong\springcloud\entities\ReadUser.class
+com\yong\springcloud\entities\Ticket.class
 com\yong\springcloud\service\ChapterClientService.class
 com\yong\springcloud\entities\AdminUser.class
 com\yong\springcloud\entities\Book.class

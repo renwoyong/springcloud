@@ -43,5 +43,18 @@ public class ReadUserServiceImpl implements ReadUserService{
 		
 		return dao.findUser(username);
 	}
+
+	@Override
+	public boolean setvip(Long userid) {
+		
+		return dao.setvip(userid);
+	}
+
+	@Override
+	public boolean cancalvip(Long userid) {
+	
+		return dao.cancalvip(userid);
+	}
+	
 	
 }

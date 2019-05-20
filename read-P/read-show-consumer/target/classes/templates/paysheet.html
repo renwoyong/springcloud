@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>九零看书网</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row" th:include="toper::html"></div>
+	<div class="container" style="width:990px">
+		<h4 th:if="${vipflag!=null}">充值VIP需要20元</h4>
+		<h4 th:if="${weekflag!=null}">充值本书的周票需要5元</h4>
+		<h4 th:if="${monthflag!=null}">充值本书的月票需要10元</h4>
+		<h4 th:if="${vipyes!=null}">阅读本章节需要充值1元</h4>
+		<h4 th:if="${vipno!=null}">阅读本章节需要充值2元</h4>
+		<a th:if="${vipflag!=null}" th:href="@{/show/setvip(userid=${userid})}" class="btn btn-primary">vip确认</a>
+		<a th:if="${vipflag!=null}" th:href="@{/show/readuserinfo}" class="btn btn-primary">vip取消</a>
+		<a th:if="${weekflag!=null}" th:href="@{/show/weekticket(bookid=${bookid},bookname=${bookname})}" class="btn btn-primary">周票</a>
+		<a th:if="${weekflag!=null}"  th:href="@{/consumer/findbookshow(bookid=${bookid})}" class="btn btn-primary">周票取消</a>
+		<a th:if="${monthflag!=null}" th:href="@{/show/monthticket(bookid=${bookid},bookname=${bookname})}" class="btn btn-primary">月票</a>
+		<a th:if="${monthflag!=null}" th:href="@{/consumer/findbookshow(bookid=${bookid})}" class="btn btn-primary">月票取消</a>
+		<a th:if="${vipyes!=null}" th:href="@{/consumer/chapter/findvipChapter(chapterid=${chapterid})}" class="btn btn-primary">1元</a>
+		<a th:if="${vipyes!=null}" th:href="@{/consumer/findbookshow(bookid=${bookid})}" class="btn btn-primary">1元取消</a>
+		<a th:if="${vipno!=null}" th:href="@{/consumer/chapter/findnovipChapter(chapterid=${chapterid})}" class="btn btn-primary">2元</a>
+		<a th:if="${vipno!=null}" th:href="@{/consumer/findbookshow(bookid=${bookid})}" class="btn btn-primary">2元取消</a>
+	</div>
+    <div class="row" th:include="footer::html"></div>
+</div>
+</body>
+</html>

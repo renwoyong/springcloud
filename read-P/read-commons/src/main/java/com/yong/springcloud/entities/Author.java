@@ -1,6 +1,7 @@
 package com.yong.springcloud.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ public class Author implements Serializable{
 	private String authorname;
 	private String authoremail;
 	private String authorsex;
-	private Long authorincome;
+	private BigDecimal authorincome;
 	private String authorintroduction;
 	private String authorworks;
 	private Long authordots;

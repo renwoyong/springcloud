@@ -118,5 +118,21 @@
 		from readuser 
 		where username=#{username};
 	</select>
+	
+	<update id="setvip" parameterType="Long">
+		update readuser set
+			vipset='1',
+			starttime=NOW(),
+			endtime=DATE_ADD(starttime,INTERVAL 1 MONTH)
+		where userid=#{userid};
+	</update>
+	
+	<update id="cancalvip" parameterType="Long">
+		update readuser set
+			vipset='0',
+			starttime=NULL,
+			endtime=NULL
+		where userid=#{userid};
+	</update>
 
 </mapper>

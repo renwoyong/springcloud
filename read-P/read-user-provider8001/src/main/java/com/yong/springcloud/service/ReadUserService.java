@@ -17,5 +17,9 @@ public interface ReadUserService {
 	  public boolean delUser(Long userid);
 	  
 	  public ReadUser findUser(String username);
+	  
+	  public boolean setvip(Long userid);
+	  
+	  public boolean cancalvip(Long userid);
 
 }

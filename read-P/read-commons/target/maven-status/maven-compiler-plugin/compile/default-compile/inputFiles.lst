@@ -1,6 +1,8 @@
 D:\eclipse\code\read-P\read-commons\src\main\java\com\yong\springcloud\entities\Author.java
 D:\eclipse\code\read-P\read-commons\src\main\java\com\yong\springcloud\service\NewBookClientService.java
+D:\eclipse\code\read-P\read-commons\src\main\java\com\yong\springcloud\entities\Ticket.java
 D:\eclipse\code\read-P\read-commons\src\main\java\com\yong\springcloud\service\ChapterClientService.java
+D:\eclipse\code\read-P\read-commons\src\main\java\com\yong\springcloud\service\TicketClientService.java
 D:\eclipse\code\read-P\read-commons\src\main\java\com\yong\springcloud\entities\AdminUser.java
 D:\eclipse\code\read-P\read-commons\src\main\java\com\yong\springcloud\entities\Chapter.java
 D:\eclipse\code\read-P\read-commons\src\main\java\com\yong\springcloud\entities\Comment.java

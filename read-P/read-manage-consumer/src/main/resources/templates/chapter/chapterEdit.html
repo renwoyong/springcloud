@@ -33,15 +33,12 @@
 				        <div class="form-group">
 				            <label for="chaptercontent" class="control-label" >ChapterContent</label>
 				            <!-- <input type="text" class="form-control" name="chaptercontent" id="ChapterContent" th:value="*{chaptercontent}" placeholder="ChapterContext"/> --> 
-				            <textarea   rows="" cols="" class="form-control" name="chaptercontent" th:text="${chapter.chaptercontent}" style="height:800px;"></textarea>
+				            <textarea   rows="" cols="" class="form-control" id="contenttextarea" name="chaptercontent" th:text="${chapter.chaptercontent}" style="height:800px;"></textarea>
+				            <div class="weui_textarea_counter"><span id="textareanum">0</span>/5000</div>
 				        </div>
 				        <div class="form-group">
 				            <label for="bookid" class="control-label">BookId</label>
 				            <input type="text" class="form-control" name="bookid" th:value="*{bookid}" placeholder="BookId"/>
-				        </div>
-				        <div class="form-group">
-				            <label for="chaptercount" class="control-label">ChapterCount</label>
-				            <input type="text" class="form-control" name="chaptercount" th:value="*{chaptercount}" placeholder="ChapterCount"/>
 				        </div>
 				        <div class="form-group">
 				            <label for="free" class="control-label">Free</label>
@@ -103,5 +100,13 @@ $(function () {
         }
     });
 });
+$('#contenttextarea').on("keyup",function(){
+	$('#textareanum').text($('#contenttextarea').val().length);//这句是在键盘按下时，实时的显示字数
+	if($('#contenttextarea').val().length > 5000){
+	$('#textareanum').text(5000);//长度大于100时0处显示的也只是100
+	$('#contenttextarea').val($('#contenttextarea').val().substring(0,5000));//长度大于100时截取钱100个字符
+	}
+})
+$('#textareanum').text($('#contenttextarea').val().length);//这句是在刷新的时候仍然显示字数
 </script>
 </html>

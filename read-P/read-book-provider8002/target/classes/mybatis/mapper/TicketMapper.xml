@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yong.springcloud.dao.TicketDao">
+
+	<select id="findticket" resultType="Ticket">
+		select
+			ticketid,
+			bookid,
+			bookname,
+			userid,
+			username,
+			weekticket,
+			DATE_FORMAT(weekstart,'%Y-%m-%d %H:%i:%s') as weekstart,
+			DATE_FORMAT(weekend,'%Y-%m-%d %H:%i:%s') as weekend,
+			monthticket,
+			DATE_FORMAT(monthstart,'%Y-%m-%d %H:%i:%s') as monthstart,
+			DATE_FORMAT(monthend,'%Y-%m-%d %H:%i:%s') as monthend
+		from ticket
+		where bookid=#{arg0} and userid=#{arg1};
+	</select>
+	
+	<insert id="addweekticket" parameterType="Ticket">
+		insert into ticket(
+			bookid,
+			bookname,
+			userid,
+			username,
+			weekticket,
+			weekstart,
+			weekend)
+		values(
+			#{bookid},
+			#{bookname},
+			#{userid},
+			#{username},
+			'1',
+			NOW(),
+			DATE_ADD(weekstart,INTERVAL 7 day));	
+	</insert>
+	
+	<insert id="addmonthticket" parameterType="Ticket">
+		insert into ticket(
+			bookid,
+			bookname,
+			userid,
+			username,
+			monthticket,
+			monthstart,
+			monthend)
+		values(
+			#{bookid},
+			#{bookname},
+			#{userid},
+			#{username},
+			'1',
+			NOW(),
+			DATE_ADD(monthstart,INTERVAL 1 month));	
+	</insert>
+	
+	<delete id="delticket" parameterType="Long">
+		delete from ticket where ticketid=#{ticketid};
+	</delete>
+
+</mapper>
