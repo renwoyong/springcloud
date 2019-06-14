@@ -27,6 +27,12 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
+	public Book findBookAsName(String bookname) {
+		
+		return bookDao.findBookAsName(bookname);
+	}
+
+	@Override
 	public boolean addBook(Book book) {
 		return bookDao.addBook(book);
 	}
@@ -178,7 +184,11 @@ public class BookServiceImpl implements BookService{
 		
 		return bookDao.findyearBookList();
 	}
-	
-	
+
+	@Override
+	public Integer findbookcount(String bookauthor) {
+		
+		return bookDao.findbookcount(bookauthor);
+	}
 	
 }

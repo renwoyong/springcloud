@@ -38,10 +38,18 @@ public class ReadUserConsumerController {
 	 }
 	  
 	  @RequestMapping(value = "/consumer/readUser/add")
-	  public String add(ReadUser user)
+	  public String add(Model model,ReadUser user)
 	  {
-		  service.add(user);
-		  return "redirect:/consumer/readUser/list";
+		  ReadUser readUser = service.findUser(user.getUsername());
+		  if(readUser!=null)
+		  {
+			  model.addAttribute("msg", "错误：用户名已存在！");
+			  return "readuser/userAdd";
+		  }
+		  else {
+			  service.add(user);
+			  return "redirect:/consumer/readUser/list";
+		}
 	  }
 
 	  
@@ -53,9 +61,16 @@ public class ReadUserConsumerController {
 	  }
 	  
 	  @RequestMapping(value="/consumer/readUser/edit")
-	  public String edit(ReadUser user) {
-		  service.upuser(user);
-		  return "redirect:/consumer/readUser/list";
+	  public String edit(Model model,ReadUser user) {
+		  ReadUser readUser = service.findUser(user.getUsername());
+		  if(readUser!=null&&(readUser.getUserid().equals(user.getUserid())==false))
+		  {
+			  return "redirect:/consumer/readUser/toedit?userid="+user.getUserid()+"&error=1";
+		  }
+		  else {
+			  service.upuser(user);
+			  return "redirect:/consumer/readUser/list";
+		} 
 	  }
 	  
 	  

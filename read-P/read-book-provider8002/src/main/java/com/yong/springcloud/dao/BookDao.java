@@ -12,6 +12,8 @@ public interface BookDao {
 	public List<Book> findBooklist();
 	//查找一本书
 	public Book findBook(Long bookid);
+	
+	public Book findBookAsName(String bookname);
 	//添加书籍
 	public boolean addBook(Book book);
 	//修改书籍
@@ -64,5 +66,7 @@ public interface BookDao {
 	public List<Book> findmonthBookList();
 	
 	public List<Book> findyearBookList();
+	
+	public Integer findbookcount(String bookauthor);
 	
 }

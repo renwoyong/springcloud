@@ -48,6 +48,7 @@
 				                <input type="reset" value="Reset" class="btn btn-info" />
 					        </div>
 					    </form>
+					    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)} "></p>
 					</div>
              	</div>
          </div>

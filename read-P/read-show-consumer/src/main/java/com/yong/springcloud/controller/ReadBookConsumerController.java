@@ -177,6 +177,7 @@ public class ReadBookConsumerController {
 		Chapter chapter1=chapters.get(0);
 		
 		ReadUser readUser = (ReadUser) request.getSession().getAttribute("findreadUser");
+
 		if(readUser!=null) {
 			request.getSession().removeAttribute("ticket");
 			Ticket ticket = ticketClientService.findTicket(bookid, readUser.getUserid());
@@ -260,9 +261,16 @@ public class ReadBookConsumerController {
 					mark=i+1;
 					if(i==0)
 					{
-						chapterpre=chapters.get(i);
-						chapternext=chapters.get(i+1);
-						break;
+						if(chapters.size()>1) {
+							chapterpre=chapters.get(i);
+							chapternext=chapters.get(i+1);
+							break;
+						}
+						else {
+							chapterpre=chapters.get(i);
+							chapternext=chapters.get(i);
+							break;
+						}
 					}
 					else if(i==(chapters.size()-1))
 					{
@@ -323,9 +331,16 @@ public class ReadBookConsumerController {
 							mark=i+1;
 							if(i==0)
 							{
-								chapterpre=chapters.get(i);
-								chapternext=chapters.get(i+1);
-								break;
+								if(chapters.size()>1) {
+									chapterpre=chapters.get(i);
+									chapternext=chapters.get(i+1);
+									break;
+								}
+								else {
+									chapterpre=chapters.get(i);
+									chapternext=chapters.get(i);
+									break;
+								}
 							}
 							else if(i==(chapters.size()-1))
 							{
@@ -403,9 +418,16 @@ public class ReadBookConsumerController {
 				mark=i+1;
 				if(i==0)
 				{
-					chapterpre=chapters.get(i);
-					chapternext=chapters.get(i+1);
-					break;
+					if(chapters.size()>1) {
+						chapterpre=chapters.get(i);
+						chapternext=chapters.get(i+1);
+						break;
+					}
+					else {
+						chapterpre=chapters.get(i);
+						chapternext=chapters.get(i);
+						break;
+					}
 				}
 				else if(i==(chapters.size()-1))
 				{
@@ -468,9 +490,16 @@ public class ReadBookConsumerController {
 				mark=i+1;
 				if(i==0)
 				{
-					chapterpre=chapters.get(i);
-					chapternext=chapters.get(i+1);
-					break;
+					if(chapters.size()>1) {
+						chapterpre=chapters.get(i);
+						chapternext=chapters.get(i+1);
+						break;
+					}
+					else {
+						chapterpre=chapters.get(i);
+						chapternext=chapters.get(i);
+						break;
+					}
 				}
 				else if(i==(chapters.size()-1))
 				{
@@ -565,6 +594,8 @@ public class ReadBookConsumerController {
 					if((currentTime.getTime() >= datestart.getTime() && currentTime.getTime() <= dateend.getTime())==false)
 					{
 						readUserClientService.cancalvip(findreadUser.getUserid());
+						ReadUser findreadUser1= readUserClientService.get(findreadUser.getUserid());
+						request.getSession().setAttribute("findreadUser", findreadUser1);
 					}
 				}
 				
@@ -638,10 +669,19 @@ public class ReadBookConsumerController {
 	}
 	
 	@RequestMapping(value="/show/readuserinfoedit")
-	public String editreaduserinfo(Model model,ReadUser readUser)
+	public String editreaduserinfo(Model model,ReadUser readUser,HttpServletRequest request)
 	{		
-		readUserClientService.upuser(readUser);
-		return "redirect:/show/readuserinfo";
+		ReadUser readUser2 = readUserClientService.findUser(readUser.getUsername());
+		if(readUser2!=null&&(readUser2.getUserid().equals(readUser.getUserid())==false))
+		{
+			return "redirect:/show/readuserinfotoedit?userid="+readUser.getUserid()+"&error=1";
+		}
+		else {
+			readUserClientService.upuser(readUser);
+			ReadUser readUser3 = readUserClientService.get(readUser.getUserid());
+			request.getSession().setAttribute("findreadUser", readUser3);
+			return "redirect:/show/readuserinfo";
+		}
 	}
 	
 	@RequestMapping(value="/show/dots")
@@ -713,10 +753,15 @@ public class ReadBookConsumerController {
 	}
 	
 	@RequestMapping(value="/show/setvip")
-	public String setvip(Long userid)
+	public String setvip(Long userid,HttpServletRequest request)
 	{
 		readpay(userid, 1);
 		readUserClientService.setvip(userid);
+		ReadUser readUser = readUserClientService.get(userid);
+		if(readUser!=null)
+		{
+			request.getSession().setAttribute("findreadUser", readUser);
+		}
 		return "redirect:/show/readuserinfo";
 	}
 	

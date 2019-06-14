@@ -25,6 +25,12 @@ public class BookController {
 		return bookService.findBook(bookid);
 	}
 	
+	@RequestMapping(value="book/findBookAsName/{bookname}",method=RequestMethod.GET)
+	public Book findBookAsName(@PathVariable("bookname") String bookname)
+	{
+		return bookService.findBookAsName(bookname);
+	}
+	
 	@RequestMapping(value="/book/findBooklist",method=RequestMethod.GET)
 	public List<Book> findBooklist()
 	{
@@ -185,5 +191,11 @@ public class BookController {
 	public List<Book> findyearBookList()
 	{
 		return bookService.findyearBookList();
+	}
+	
+	@RequestMapping(value="/book/findbookcount/{bookauthor}",method=RequestMethod.GET)
+	public Integer findbookcount(@PathVariable("bookauthor") String bookauthor)
+	{
+		return bookService.findbookcount(bookauthor);
 	}
 }

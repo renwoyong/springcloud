@@ -17,7 +17,7 @@
 	<div class="container" style="width:990px">
 		<div class="comment-box">
 			<div class="comment-list-container">
-				<table>
+				<table th:if="comments!=null">
 				 <tr th:each="comment: ${comments}">  
                     <td>
                        <span th:text="${comment.username}+'：'+${comment.context}+' '+${comment.createdtime}"></span>  
@@ -45,4 +45,15 @@
     <div class="row" th:include="footer::html"></div>
 </div>
 </body>
+<script>
+$(function () {
+	var url =location.search;
+	if(url.indexOf("error1")>0){
+		alert("评论内容不能为空或多于100字");
+	}
+	if(url.indexOf("error2")>0){
+		alert("用户未登陆，请先登录再评论！");
+	}
+})
+</script>
 </html>

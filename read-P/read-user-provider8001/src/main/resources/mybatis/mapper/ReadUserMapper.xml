@@ -85,17 +85,19 @@
 		</trim>
 	</insert>
 	<update id="upUser" parameterType="ReadUser">
-		update readuser set 
-			username=#{username},
-			userpwd=#{userpwd},
-			useremail=#{useremail},
-			usersex=#{usersex},
-			readcount=#{readcount},
-			readpay=#{readpay},
-			state=#{state},
-			vipset=#{vipset},
-			starttime=#{starttime},
-			endtime=#{endtime}
+		update readuser
+		<set>
+			<if test="username!=null">username=#{username},</if>
+			<if test="userpwd!=null">userpwd=#{userpwd},</if>
+			<if test="useremail!=null">useremail=#{useremail},</if>
+			<if test="usersex!=null">usersex=#{usersex},</if>
+			<if test="readcount!=null">readcount=#{readcount},</if>
+			<if test="readpay!=null">readpay=#{readpay},</if>
+			<if test="state!=null">state=#{state},</if>
+			<if test="vipset!=null">vipset=#{vipset},</if>
+			<if test="starttime!=null">starttime=#{starttime},</if>
+			<if test="endtime!=null">endtime=#{endtime}</if>
+		</set>
 		 where userid=#{userid};
 	</update>
 	<delete id="delUser" parameterType="Long">

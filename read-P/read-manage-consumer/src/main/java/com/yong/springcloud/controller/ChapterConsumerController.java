@@ -32,19 +32,21 @@ public class ChapterConsumerController {
 		book.setBookcount(sum);
 		bookClientService.upBook(book);
 		model.addAttribute("chapters", chapters);
+		model.addAttribute("bookid", bookid);
 		return "chapter/chapterlist";
 	}
 	
 	@RequestMapping(value="/consumer/chapter/toadd")
-	public String toadd()
+	public String toadd(Model model, Long bookid)
 	{
+		model.addAttribute("bookid", bookid);
 		return "chapter/chapterAdd";
 	}
 	
 	@RequestMapping(value="/consumer/chapter/add")
-	public String add(Chapter chapter)
+	public String add(Chapter chapter,String chaptercontent)
 	{
-		chapter.setChaptercount(chapter.getChaptercontent().length());
+		chapter.setChaptercount(chaptercontent.length());
 		chapterClientService.addChapter(chapter);
 		String url="redirect:/consumer/chapter/findChapterlist?bookid="+chapter.getBookid();
 		return url;

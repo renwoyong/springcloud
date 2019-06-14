@@ -69,6 +69,12 @@
 </body>
 <script type="text/javascript">
 $(function () {
+	
+	var url =location.search;
+	if(url.indexOf("error")>0){
+		alert("作者名已存在！");
+	}
+	
     $('#form1').bootstrapValidator({
 　　　　message: 'This value is not valid',
         　feedbackIcons: {

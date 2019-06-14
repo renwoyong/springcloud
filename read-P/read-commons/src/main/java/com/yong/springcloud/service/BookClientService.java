@@ -18,6 +18,9 @@ public interface BookClientService {
 	@RequestMapping(value="/book/findBook/{bookid}",method=RequestMethod.GET)
 	public Book findBook(@PathVariable("bookid") long bookid);
 	
+	@RequestMapping(value="book/findBookAsName/{bookname}",method=RequestMethod.GET)
+	public Book findBookAsName(@PathVariable("bookname") String bookname);
+	
 	@RequestMapping(value="/book/findBooklist",method=RequestMethod.GET)
 	public List<Book> findBooklist();
 	
@@ -102,5 +105,8 @@ public interface BookClientService {
 	
 	@RequestMapping(value="/book/findyearBookList",method=RequestMethod.GET)
 	public List<Book> findyearBookList();
+	
+	@RequestMapping(value="/book/findbookcount/{bookauthor}",method=RequestMethod.GET)
+	public Integer findbookcount(@PathVariable("bookauthor") String bookauthor);
 	
 }

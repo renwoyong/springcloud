@@ -28,7 +28,7 @@
 	<ul id="myTab" class="nav nav-tabs">
 		<li><a href="#info" data-toggle="tab">作品信息</a></li>
 		<li><a href="#calo" data-toggle="tab">目录</a></li>
-		<li><a th:href="@{/consumer/comment/findshowcomments(bookid=${book.bookid})}">作品评论</a></li>
+		<li><a th:href="@{/consumer/comment/findshowcomments(bookid=${book.bookid},bookname=${book.bookname})}">作品评论</a></li>
 	</ul>
 	<div id="myTabContent" class="tab-content">
 		<div class="tab-pane" id="info">

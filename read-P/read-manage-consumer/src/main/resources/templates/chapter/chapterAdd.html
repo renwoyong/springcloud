@@ -25,6 +25,7 @@
                     </div>
                  	<div class="col-md-10">
 		    			<form class="form-horizontal" id="form1"  th:action="@{/consumer/chapter/add}"  method="post">
+		    				<input type="hidden" name="bookid" th:value="${bookid}" />
 					        <div class="form-group">
 					            <label for="chaptername" class="control-label">ChapterName</label>
 					            <input type="text" class="form-control" name="chaptername" placeholder="ChapterName"/>
@@ -34,10 +35,6 @@
 				                 <!-- <input type="text" class="form-control" name="chaptercontent" id="ChapterContent" placeholder="ChapterContent" style="height:800px;"/> -->
 				                <textarea   rows="" cols="" class="form-control" id="contenttextarea" name="chaptercontent" style="height:800px;"></textarea>
 				                <div class="weui_textarea_counter"><span id="textareanum">0</span>/5000</div>
-					        </div>
-					        <div class="form-group">
-					            <label for="bookid" class="control-label">BookId</label>
-					            <input type="text" class="form-control" name="bookid" placeholder="BookId"/>
 					        </div>
 					        <div class="form-group">
 					            <label for="free" class="control-label">Free</label>

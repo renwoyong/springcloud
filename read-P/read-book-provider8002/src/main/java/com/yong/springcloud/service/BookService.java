@@ -10,6 +10,8 @@ public interface BookService {
 	
 	public Book findBook(Long bookid);
 	
+	public Book findBookAsName(String bookname);
+	
 	public boolean addBook(Book book);
 	
 	public boolean upBook(Book book);
@@ -62,4 +64,6 @@ public interface BookService {
 	public List<Book> findmonthBookList();
 	
 	public List<Book> findyearBookList();
+	
+	public Integer findbookcount(String bookauthor);
 }
